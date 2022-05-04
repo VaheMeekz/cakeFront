@@ -1,0 +1,167 @@
+.divOne {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 5rem;
+}
+
+.divOne div {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.divOne h2 {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #FF698D;
+}
+
+.divOne p {
+    text-indent: 30px;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 34px;
+    color: #000000;
+}
+
+.divOne button {
+    background: #3B0C3A;
+    box-shadow: -5px 7px 16px rgba(255, 255, 255, 0.1);
+    border-radius: 17px;
+    border: none;
+    color: #FFFFFF;
+    padding: 8px 40px;
+    cursor: pointer !important;
+    transition: 0.5s;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+
+}
+
+.divOne button:hover {
+    background: #774276;
+    box-shadow: -5px 7px 16px rgba(255, 255, 255, 0.1);
+    border-radius: 17px;
+    border: none;
+    color: #FFFFFF;
+    padding: 8px 40px;
+    transition: 0.8s;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.homeCofe img {
+    width: 100%;
+}
+
+@media(max-width: 850px) {
+
+    .homeCofe {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem auto;
+    }
+
+    .homeCofe img {
+        width: 100%;
+    }
+
+    .divOne {
+        padding-bottom: 0;
+    }
+
+    .divOne h2 {
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 42px;
+        color: #FF698D;
+    }
+    .divOne p {
+        text-indent: 0;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 34px;
+        color: #000000;
+    }
+
+    .divOne {
+        padding-top: 0;
+    }
+
+    .divOne button {
+        background: #3B0C3A;
+        box-shadow: -5px 7px 16px rgba(255, 255, 255, 0.1);
+        border-radius: 17px;
+        border: none;
+        color: #FFFFFF;
+        padding: 5px 30px;
+        cursor: pointer !important;
+        transition: 0.5s;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 26px;
+
+    }
+}
+
+@media(max-width: 600px) {
+    .divOne {
+        padding-bottom: 5rem;
+    }
+
+    .divOne h2 {
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 42px;
+        color: #FF698D;
+    }
+    .divOne p {
+        text-indent: 30px;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 34px;
+        color: #000000;
+    }
+
+    .divOne button {
+        background: #3B0C3A;
+        box-shadow: -5px 7px 16px rgba(255, 255, 255, 0.1);
+        border-radius: 17px;
+        border: none;
+        color: #FFFFFF;
+        padding: 8px 35px;
+        cursor: pointer !important;
+        transition: 0.5s;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+
+    }
+
+}
