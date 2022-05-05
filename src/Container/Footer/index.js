@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import css from './footer.module.css';
 import {AiFillFacebook} from 'react-icons/ai';
 import {BsLinkedin} from 'react-icons/bs';
@@ -7,8 +7,19 @@ import {GoLocation} from 'react-icons/go'
 import {BsTelephone} from 'react-icons/bs'
 import {AiOutlineMail} from 'react-icons/ai'
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {contactsData} from "../../Store/actions/productActions";
 
 const Footer = () => {
+
+    const contactUsData = useSelector(state => state.productReducer.contactsGet);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(contactsData())
+    },[])
+
     return (
         <div className={css.footerMain}>
             <Container>
@@ -37,11 +48,17 @@ const Footer = () => {
                     <Col md={6} lg={4} xs={12}>
                         <div className={css.colLi}>
                             <h2>Contact Info </h2>
-                            <ul>
-                                <li><i><GoLocation/></i>1234  Lorem Ipsum is </li>
-                                <li><i><BsTelephone/></i>(123) 456-7890</li>
-                                <li><i><AiOutlineMail/></i>willie.jennings@example.com</li>
-                            </ul>
+                            {
+                                contactUsData?.map((item) => {
+                                    return (
+                                        <ul>
+                                            <li><i><GoLocation/></i>{item.location}</li>
+                                            <li><i><BsTelephone/></i>{item.phone}</li>
+                                            <li><i><AiOutlineMail/></i>{item.email}</li>
+                                        </ul>
+                                    )
+                                })
+                            }
                         </div>
                     </Col>
                 </Row>

@@ -41,7 +41,7 @@ a {
     font-family: 'Roboto Slab';
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 32px;
     color: #FFFFFF;
     text-decoration: none;
@@ -175,6 +175,44 @@ a {
     cursor: pointer;
 }
 
+.show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: black !important;
+    border-color: #13653f;
+}
+
+btn-success:active:focus, .show > .btn-success.dropdown-toggle:focus {
+    box-shadow: none !important;
+}
+
+.btn-success:focus {
+    color: #fff;
+    background-color: black !important;
+    border-color: black !important;
+    box-shadow: none !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.dropdown-menu .show {
+    width: 20% !important;
+}
+
+.dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -50px !important;
+    right: 0 !important;
+    margin-top: 0.125rem;
+}
+
+.dropdown-item {
+    color: black !important;
+}
+
 .pagBox {
     display: flex;
     justify-content: end;
@@ -209,7 +247,7 @@ a {
     font-family: 'Roboto Slab';
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 150.38%;
     color: #FFFFFF;
 }
@@ -220,7 +258,7 @@ a {
 }
 
 .nav-link:focus, .nav-link:hover {
-     color: none !important;
+    color: none !important;
 }
 
 .slick-arrow {
@@ -238,7 +276,7 @@ a {
     justify-content: center;
 }
 
-.slick-dots  {
+.slick-dots {
     list-style-type: none !important;
 }
 
@@ -257,7 +295,7 @@ a {
     margin: 0.5rem;
 }
 
-@media(max-width: 920px) {
+@media (max-width: 920px) {
     .nav-tabs {
         display: flex !important;
         justify-content: start !important;

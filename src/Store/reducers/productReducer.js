@@ -7,13 +7,13 @@ import {
     BASKET_POST_DELETE,
     CATEGORY_GET,
     CHOOSE_GET,
-    CONTACT_POST, DELEVERY_DATA__GET, DELEVERY_FOOTER_GET,
+    CONTACT_POST, CONTACTS_GET, DELEVERY_DATA__GET, DELEVERY_FOOTER_GET,
     DELEVERY_GET,
     DELEVERY_GET_VALUE, DETAIL_FOOTER_GET,
     FILTER_PRODUCT, HOME_BANNER_DATA__GET, HOME_FOOTER_GET, LANG_GET,
     LOGIN_POST, PRODUCT_BANNER_DATA__GET, PRODUCT_DETAIL_BANNER_DATA__GET,
     PRODUCT_DETAIL_GET, PRODUCT_FOOTER_GET,
-    PRODUCT_GET,
+    PRODUCT_GET, PROFILE__GET,
     STATUS_CODE,
     SUBSCRIBE_POST, TERMS_GET, WISH_BANNER_DATA__GET,
     WISH_DELETE,
@@ -28,7 +28,7 @@ const initialState = {
     basket: [],
     wish: [],
     statusCode: undefined,
-    loginErr: undefined,
+    loginErr: [],
     category: [],
     count: null,
     contact: [],
@@ -52,7 +52,9 @@ const initialState = {
     productBanner: [],
     wishBanner: [],
     basketBanner: [],
-    detailBanner: []
+    detailBanner: [],
+    profileType: [],
+    contactsGet: []
 }
 
 
@@ -184,6 +186,14 @@ export const productReducer = (state = initialState, action) => {
         case PRODUCT_DETAIL_BANNER_DATA__GET:
 
             return {...state, detailBanner: action.payload}
+
+        case PROFILE__GET:
+
+            return {...state, profileType: action.payload}
+
+        case CONTACTS_GET:
+
+            return {...state, contactsGet: action.payload}
 
         default:
             return state;

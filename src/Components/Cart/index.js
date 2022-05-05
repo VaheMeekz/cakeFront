@@ -15,17 +15,11 @@ const Cart = ({basketData}) => {
 
     const [total, setTotal] = useState(Number(tot))
 
-    // useEffect(() => {
-    //     setTotal(total + total)
-    // },[tot])
-
     const [isDisabled, setIsDisabled] = useState(true);
 
     const handleClick = () => {
         setIsDisabled(!isDisabled)
     };
-
-    console.log(total,'[][][][][]')
 
     return (
         <div>

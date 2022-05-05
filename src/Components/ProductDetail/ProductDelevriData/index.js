@@ -197,6 +197,13 @@ const ProductDelevriData = ({item, langValue}) => {
     let cake_addition_name = item?.cake_addition_name_en.split(",").map((i) => i);
     let cake_additionPrice = item?.cake_addition_price.split(',').map((i) => i);
 
+
+    const handleIngredients = (e) => {
+        data['Ingredients'] = e.target.name
+        setData(data)
+    }
+
+
     return (
         <div className={css.mainDesc}>
             <h1>{item.nameEn}</h1>
@@ -226,7 +233,7 @@ const ProductDelevriData = ({item, langValue}) => {
                                     cake_addition_name?.map((item) => {
                                         return (
                                             <label className={css.checkbox}>
-                                                <input onChange={handleChange} type="checkbox"/>
+                                                <input name={item} onChange={handleIngredients} type="checkbox"/>
                                                 <span>{item}</span>
                                             </label>
                                         )

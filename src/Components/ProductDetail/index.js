@@ -20,8 +20,8 @@ const ProductDetail = ({langValue}) => {
 
     const productDataDetailFooterImage = productDataDetailFooter?.map(i => i.image)
 
-    const add = productDataDetail?.map(i => i.adition_info_en.split(','))
-    const addPrice = productDataDetail?.map(i => i.addition_info_value.split(','))
+    const add = productDataDetail?.map(i => i.adition_info_en?.split(','))
+    const addPrice = productDataDetail?.map(i => i.addition_info_value?.split(','))
 
     const dispatch = useDispatch();
 

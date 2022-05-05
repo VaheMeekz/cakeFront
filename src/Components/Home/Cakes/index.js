@@ -50,7 +50,7 @@ const Cakes = ({langValue}) => {
         prevArrow: <NextArrow/>,
         responsive: [
             {
-                breakpoint: 900,
+                breakpoint: 950,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,

@@ -4,7 +4,7 @@ import {AiOutlineHeart, AiOutlineSearch} from "react-icons/ai";
 import {BsCart3} from "react-icons/bs";
 import {FaFacebookF} from "react-icons/fa";
 import {FiInstagram} from "react-icons/fi";
-import {Col, Container, Nav, Navbar, NavLink, Row} from "react-bootstrap";
+import {Col, Container, Nav, Navbar, NavLink, Accordion, Dropdown} from "react-bootstrap";
 import {privatePAge} from "../../Config/routes.index";
 import {Link, useParams, useSearchParams, useLocation} from "react-router-dom";
 import homeBg from '../../Images/homebg.png'
@@ -14,9 +14,9 @@ import {AiOutlineMail} from 'react-icons/ai'
 import {useDispatch, useSelector} from "react-redux";
 import {
     aboutBannerUs, basketBannerData,
-    basketPost, detailBannerData,
+    basketPost, contactsData, detailBannerData,
     homeBannerGet,
-    langGet, productBanner,
+    langGet, productBanner, profileGet,
     signUpPost, wishBanner,
     wishPost
 } from "../../Store/actions/productActions";
@@ -25,20 +25,22 @@ import {useTranslation} from "react-i18next";
 import i18next from "i18next";
 import Cookies from 'js-cookie'
 import Slider from "react-slick";
+import profile from '../../Images/profile.svg'
 
 
 const Header = () => {
 
     const wishData = useSelector(state => state.productReducer.wish);
     const langValue = useSelector(state => state.productReducer.lang)
-
+    const profileType = useSelector(state => state.productReducer.profileType)
     const basketData = useSelector(state => state.productReducer.basket);
     const homeBannerData = useSelector(state => state.productReducer.homeBanner);
     const aboutBannerData = useSelector(state => state.productReducer.aboutBanner);
     const productBannerData = useSelector(state => state.productReducer.productBanner);
-    const wishBannerData = useSelector(state => state.productReducer.productBanner);
+    const wishBannerData = useSelector(state => state.productReducer.wishBanner);
     const basketMAinBannerData = useSelector(state => state.productReducer.productBanner);
     const detailMainBannerData = useSelector(state => state.productReducer.productBanner);
+    const contactUsData = useSelector(state => state.productReducer.contactsGet);
 
     const bannerImage = homeBannerData?.map((item) => {
         return item.image.split(',').map(i => i)
@@ -53,6 +55,7 @@ const Header = () => {
         dispatch(wishBanner())
         dispatch(basketBannerData())
         dispatch(detailBannerData())
+        dispatch(contactsData())
     }, [])
 
     const [bas, setBas] = useState()
@@ -60,11 +63,11 @@ const Header = () => {
 
     useEffect(() => {
         setBas(basketData?.length)
-    },[basketData])
+    }, [basketData])
 
     useEffect(() => {
         setWish(wishData?.length)
-    },[wishData])
+    }, [wishData])
 
     const dispatch = useDispatch();
 
@@ -104,6 +107,15 @@ const Header = () => {
 
     useEffect(() => {
         // window.scrollTo(0, 0)
+        let valMain = []
+        if (JSON.parse(localStorage.getItem("Auth"))) {
+            valMain.push(JSON.parse(localStorage.getItem("Auth")))
+        }
+        dispatch(profileGet(valMain))
+    }, []);
+
+    useEffect(() => {
+        // window.scrollTo(0, 0)
         if (JSON.parse(localStorage.getItem("wishList"))) {
             let arr = [];
             JSON.parse(localStorage.getItem("wishList")).forEach(i => {
@@ -122,24 +134,33 @@ const Header = () => {
         slidesToScroll: 3
     };
 
+    console.log(bannerImage[0],'++++++++++++++++++++++++')
+
     return (
         <div>
             <div className={css.headerMainOne}>
 
-                <div className={css.headerOne}>
-                    <span>
-                        <i><BsTelephone/></i>
-                        <p>010 123 456</p>
-                    </span>
-                    <span>
-                        <i><AiOutlineMail/></i>
-                        <p>name.surname@gmail.com</p>
-                    </span>
-                    <div className={css.headerIcons}>
-                        <i><FaFacebookF/></i>
-                        <i><FiInstagram/></i>
-                    </div>
-                </div>
+                {
+                    contactUsData?.map((item) => {
+                        return (
+                            <div className={css.headerOne}>
+                                <span>
+                                    <i><BsTelephone/></i>
+                                    <p>{item.phone}</p>
+                                </span>
+                                            <span>
+                                    <i><AiOutlineMail/></i>
+                                    <p>{item.email}</p>
+                                </span>
+                                <div className={css.headerIcons}>
+                                    <i><FaFacebookF/></i>
+                                    <i><FiInstagram/></i>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+
 
                 <div>
                     <div className={css.headerRight}>
@@ -189,7 +210,21 @@ const Header = () => {
                                             <Link to="/contact_us">{t('contacts')}</Link>
                                         </div>
                                         <div>
-                                            <button className={css.btn}><Link to='/log_in'>{t("login")}</Link></button>
+                                            {
+                                                profileType?.length > 0 ?
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                                            <img src={profile} alt=""/>
+                                                        </Dropdown.Toggle>
+
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item href="/log_in">Login</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                    :
+                                                    <button className={css.btn}><Link to='/log_in'>{t("login")}</Link>
+                                                    </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>

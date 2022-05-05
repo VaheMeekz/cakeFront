@@ -1,5 +1,6 @@
 .headerMainOne {
     display: flex;
+    width: 100%;
     background: black;
     padding: 0.8rem 3rem;
     justify-content: space-between;
@@ -15,6 +16,7 @@
 
 .headerOne span i {
     font-weight: bold;
+    font-size: 22px;
 }
 
 .headerOne span p {
@@ -123,7 +125,7 @@
     width: 100%;
     margin: 0 auto;
     background: black;
-    padding: 0.3rem 1.5rem;
+    padding: 0 2.3rem;
 }
 
 .homeOne {
@@ -149,6 +151,10 @@
     font-size: 90px;
     line-height: 119px;
     color: #FFFFFF;
+}
+
+.profileBtn {
+   color: #FFFFFF;
 }
 
 .homeTwo p {
@@ -213,6 +219,7 @@
 
 .main {
     width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }

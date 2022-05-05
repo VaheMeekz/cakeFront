@@ -8,6 +8,9 @@ import {loginPost, signUpPost} from "../../Store/actions/productActions";
 import {Formik} from 'formik';
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
+import axios from "axios";
+import keys from "../../keys";
+import {LOGIN_POST} from "../../Store/types";
 
 const LogIn = () => {
 
@@ -15,21 +18,14 @@ const LogIn = () => {
 
     let navigate = useNavigate();
 
-    const loginError = useSelector(state => state.productReducer.loginErr);
+    const [checked, setChecked] = useState(false);
+    const [checkVal, setCheckVal] = useState({val: false})
 
-    const [loginData, setLoginData] = useState({})
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loginPost())
-    }, [])
-
-    const handleChangeForm = (e) => {
-        loginData[e.target.name] = e.target.value;
-        setLoginData(loginData)
+    const handleCheck = (e) => {
+        setChecked(!checked)
+        checkVal.val = !checkVal.val
+        setCheckVal(checkVal)
     }
-
 
     return (
         <div>
@@ -67,21 +63,53 @@ const LogIn = () => {
                                     }}
                                     onSubmit={(values, {setSubmitting}) => {
                                         setTimeout(() => {
-                                            dispatch(loginPost(loginData))
-                                            if (loginError == undefined) {
-                                                navigate('/')
-                                            }
-                                            values.email= ''
-                                            values.password= ''
-                                            Swal.fire({
-                                                position: 'center',
-                                                icon: 'success',
-                                                title: 'Email Success',
-                                                showConfirmButton: false,
-                                                timer: 1500
-                                            })
-                                            setSubmitting(false);
-                                        }, 400);
+                                            axios.post(`${keys.baseURI}/users/login`, values)
+                                                .then(function (response) {
+                                                    if (response.data.error == undefined) {
+                                                        if (checkVal && checkVal.val !== false) {
+                                                            localStorage.setItem('Auth',
+                                                                JSON.stringify({
+                                                                    name: response.data.name,
+                                                                    email: response.data.email,
+                                                                    token: response.data.token
+                                                                }));
+                                                            navigate('/')
+                                                            Swal.fire({
+                                                                position: 'center',
+                                                                icon: 'success',
+                                                                title: 'Email Success',
+                                                                showConfirmButton: false,
+                                                                timer: 1500
+                                                            })
+                                                        } else {
+                                                            navigate('/')
+                                                            Swal.fire({
+                                                                position: 'center',
+                                                                icon: 'success',
+                                                                title: 'Email Success',
+                                                                showConfirmButton: false,
+                                                                timer: 1500
+                                                            })
+                                                        }
+                                                    }
+                                                    if (response.data.error !== undefined) {
+                                                        values.email = ''
+                                                        values.password = ''
+                                                        setChecked(false)
+                                                        Swal.fire({
+                                                            position: 'center',
+                                                            icon: 'error',
+                                                            title: 'Error',
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        })
+                                                        setSubmitting(false);
+                                                    }
+                                                })
+                                                .catch(function (error) {
+                                                    console.log(error);
+                                                });
+                                        }, 10);
                                     }}
                                 >
                                     {({
@@ -93,7 +121,7 @@ const LogIn = () => {
                                           handleSubmit,
                                           isSubmitting,
                                       }) => (
-                                        <form onSubmit={handleSubmit} onChange={handleChangeForm}
+                                        <form onSubmit={handleSubmit}
                                               className={css.formDiv}>
                                             <input
                                                 type="email"
@@ -116,10 +144,10 @@ const LogIn = () => {
                                             </span>
                                             <div className={css.forgetDiv}>
                                                 <label className={css.checkbox}>
-                                                    <input type="checkbox"/>
+                                                    <input type="checkbox" onChange={handleCheck} value={checkVal.val} checked={checked}/>
                                                     <span>{t("Rememberme")}</span>
                                                 </label>
-                                                <Link to='/contact'>{t("ForgetPassword")}</Link>
+                                                <Link to='/forget_password'>{t("ForgetPassword")}</Link>
                                             </div>
                                             <button className={css.btnDiv} type="submit" disabled={isSubmitting}>
                                                 {t("Login")}

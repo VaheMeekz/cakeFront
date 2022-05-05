@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import css from './contactUs.module.css';
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import contactImgMian from '../../Images/contactImg.png';
@@ -7,7 +7,7 @@ import contactTel from '../../Images/contactTel.svg';
 import contactEmail from '../../Images/contactEmail.svg';
 import Iframe from "react-iframe";
 import {useDispatch, useSelector} from "react-redux";
-import {contactPost} from "../../Store/actions/productActions";
+import {contactPost, contactsData} from "../../Store/actions/productActions";
 import Pink from "../Pink";
 import {Formik} from 'formik';
 import Swal from "sweetalert2";
@@ -17,16 +17,22 @@ const ContactUs = () => {
 
     const {t} = useTranslation();
 
-    const contactUs = useSelector(state => state.productReducer.contact)
+    const contactUs = useSelector(state => state.productReducer.contactsGet)
 
     const [contactData, setContactData] = useState({})
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+       dispatch(contactsData())
+    },[])
+
     const handleChangeForm = (e) => {
         contactData[e.target.name] = e.target.value;
         setContactData(contactData)
     }
+
+    console.log(contactUs,'+++++++++++++++++++++++++')
 
     return (
         <div>
@@ -147,18 +153,26 @@ const ContactUs = () => {
                         <div className={css.divImgContact}>
                             <img src={contactImgMian} height="180px" alt=""/>
                             <div className={css.divImgs}>
-                                <div>
-                                    <img src={contactLoaction} width="40" height="50" alt=""/>
-                                    <p>1234 Lorem Ipsum is</p>
-                                </div>
-                                <div>
-                                    <img src={contactTel} width="40" height="40" alt=""/>
-                                    <p>(123) 456-7890</p>
-                                </div>
-                                <div>
-                                    <img src={contactEmail} width="40" height="40" alt=""/>
-                                    <p>willie.jennings@example.com</p>
-                                </div>
+                                {
+                                    contactUs?.map((item) => {
+                                        return (
+                                            <>
+                                                <div>
+                                                    <img src={contactLoaction} width="40" height="50" alt=""/>
+                                                    <p>{item.location}</p>
+                                                </div>
+                                                <div>
+                                                    <img src={contactTel} width="40" height="40" alt=""/>
+                                                    <p>{item.phone}</p>
+                                                </div>
+                                                <div>
+                                                    <img src={contactEmail} width="40" height="40" alt=""/>
+                                                    <p>{item.email}</p>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </Col>

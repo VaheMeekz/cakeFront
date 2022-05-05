@@ -7,13 +7,13 @@ import {
     BASKET_POST_DELETE,
     CATEGORY_GET,
     CHOOSE_GET,
-    CONTACT_POST, DELEVERY_DATA__GET, DELEVERY_FOOTER_GET,
+    CONTACT_POST, CONTACTS_GET, DELEVERY_DATA__GET, DELEVERY_FOOTER_GET,
     DELEVERY_GET,
     DELEVERY_GET_VALUE, DETAIL_FOOTER_GET,
     FILTER_PRODUCT, HOME_BANNER_DATA__GET, HOME_FOOTER_GET, LANG_GET,
     LOGIN_POST, PRODUCT_BANNER_DATA__GET, PRODUCT_DETAIL_BANNER_DATA__GET,
     PRODUCT_DETAIL_GET, PRODUCT_FOOTER_GET,
-    PRODUCT_GET,
+    PRODUCT_GET, PROFILE__GET,
     STATUS_CODE,
     SUBSCRIBE_POST, TERMS_GET, WISH_BANNER_DATA__GET,
     WISH_DELETE,
@@ -106,7 +106,7 @@ export const loginPost = (loginData) => {
     return (dispatch) => {
         axios.post(`${keys.baseURI}/users/login`, loginData)
             .then(function (response) {
-                dispatch({type: LOGIN_POST, payload: response.data.error})
+                dispatch({type: LOGIN_POST, payload: response.data})
             })
             .catch(function (error) {
                 console.log(error);
@@ -379,5 +379,23 @@ export const detailBannerData = () => {
             .catch(function (error) {
                 console.log(error);
             })
+    }
+}
+
+export const contactsData = () => {
+    return (dispatch) => {
+        axios.get(`${keys.baseURI}/contacts`)
+            .then(function (response) {
+                dispatch({type: CONTACTS_GET, payload: response.data})
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+}
+
+export const profileGet = (val) => {
+    return (dispatch) => {
+        dispatch({type: PROFILE__GET, payload: val})
     }
 }
