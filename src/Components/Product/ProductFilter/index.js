@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import css from './productFilter.module.css';
 import {RiFilterLine} from 'react-icons/ri';
 import {RiFilterOffLine} from 'react-icons/ri';
@@ -22,8 +22,6 @@ const ProductFilter = ({
                        }) => {
 
     const categoryData = useSelector(state => state.productReducer.category)
-    const filterProductMain = useSelector(state => state.productReducer.productFilter)
-
 
     const {t} = useTranslation();
 
@@ -50,6 +48,7 @@ const ProductFilter = ({
         if (itemIndex !== -1) {
             prev.splice(itemIndex, 1);
         } else {
+            setBtn(true)
             prev.push(index);
         }
         setCategoryId([...prev]);
@@ -57,14 +56,11 @@ const ProductFilter = ({
 
     const mainBtn = () => {
         dispatch(productGet(categoryId, minValue, maxValue, '', '', search, lang))
-        setBtn(true)
     }
-
-    let checkedMain = useRef()
 
     const unCheck = () => {
         let x = document.getElementsByClassName("checkbox");
-        for(let i = 0; i <= x.length; i++) {
+        for (let i = 0; i <= x.length; i++) {
             x[i].checked = false;
         }
     }
@@ -105,7 +101,7 @@ const ProductFilter = ({
                 {
                     categoryData?.map((item, index) => {
                         return (
-                            <CheckCategory ref={checkedMain} item={item} index={index} langValue={langValue} setCheck={setCheck}
+                            <CheckCategory item={item} index={index} langValue={langValue} setCheck={setCheck}
                                            check={check} handleChangeCheckBox={handleChangeCheckBox}/>
                         )
                     })
@@ -120,10 +116,7 @@ const ProductFilter = ({
                 </span>
             </div>
             <div className={css.btnDiv}>
-                {
-                    btn ? <button className={css.diseblidBtn}>{t("Search")}</button> : <button onClick={mainBtn}>{t("Search")}</button>
-                }
-
+                <button onClick={mainBtn}>{t("Search")}</button>
             </div>
         </div>
     );

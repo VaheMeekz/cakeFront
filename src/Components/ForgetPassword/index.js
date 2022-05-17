@@ -41,10 +41,10 @@ const ForgetPassword = () => {
                             <div className={css.divForm}>
                                 <div className={css.divText}>
                                     <div className={css.mediaImg}>
-                                        <h1>Forget Password</h1>
+                                        <h1>{t("ForgetPassword")}</h1>
                                         <img src={chefWoman} alt=""/>
                                     </div>
-                                    <h2>{t("Welcomebackto")} <span>{t("Companyname")}</span></h2>
+                                    <h2>{t("Welcomebackto")} </h2>
                                 </div>
                                 <Formik
                                     initialValues={{email: ''}}
@@ -54,7 +54,7 @@ const ForgetPassword = () => {
                                             errors.email = Swal.fire({
                                                 icon: 'error',
                                                 title: 'Oops...',
-                                                text: 'Requerid!',
+                                                text: `${t("Requerid")}!`,
                                             });
                                             errors.email = ''
                                         } else if (
@@ -70,7 +70,6 @@ const ForgetPassword = () => {
                                                 if (response.data.answer == true) {
                                                     setShow(true)
                                                     setEmailVal(values.email)
-                                                    console.log(emailVal, 'llllllllllll')
                                                 } else {
                                                     Swal.fire({
                                                         position: 'center',
@@ -100,6 +99,7 @@ const ForgetPassword = () => {
                                         <form onSubmit={handleSubmit}
                                               className={css.formDiv}>
                                             <input
+                                                placeholder={"Email"}
                                                 type="email"
                                                 name="email"
                                                 onChange={handleChange}
@@ -226,6 +226,7 @@ const ForgetPassword = () => {
                                               }) => (
                                                 <form onSubmit={handleSubmit} className={css.forgetTwo}>
                                                     <input
+                                                        placeholder={"Password"}
                                                         type="password"
                                                         name="password1"
                                                         onChange={handleChange}
@@ -233,6 +234,7 @@ const ForgetPassword = () => {
                                                         value={values.password1}
                                                     />
                                                     <input
+                                                        placeholder={"Return Password"}
                                                         type="password"
                                                         name="password"
                                                         onChange={handleChange}

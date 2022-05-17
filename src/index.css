@@ -37,6 +37,11 @@ a {
     justify-content: space-between !important;
 }
 
+.dropdown-menu a p {
+    font-size: 18px;
+    margin: 0;
+}
+
 .navbar-nav a {
     font-family: 'Roboto Slab';
     font-style: normal;
@@ -240,6 +245,28 @@ btn-success:active:focus, .show > .btn-success.dropdown-toggle:focus {
     color: #3B0C3A;
 }
 
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    text-align: center;
+}
+
+.link:hover {
+     color: none !important;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #FFFFFF;
+    isolation: isolate;
+}
+
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    background: 0 0;
+    border: 1px solid #FFFFFF;
+    /* border-top-left-radius: 0.25rem; */
+    /* border-top-right-radius: 0.25rem; */
+}
+
 .nav-tabs .nav-link.active {
     background: #3B0C3A !important;
     border-radius: 0 0px 0px 0px !important;
@@ -251,6 +278,7 @@ btn-success:active:focus, .show > .btn-success.dropdown-toggle:focus {
     line-height: 150.38%;
     color: #FFFFFF;
 }
+
 
 .nav-tabs .nav-link:hover {
     border-color: none !important;
@@ -316,7 +344,7 @@ btn-success:active:focus, .show > .btn-success.dropdown-toggle:focus {
 
     .nav-tabs {
         display: flex !important;
-        justify-content: start !important;
+        justify-content: center !important;
         margin: 2rem 0;
     }
 

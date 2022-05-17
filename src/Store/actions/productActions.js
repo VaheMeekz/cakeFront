@@ -55,7 +55,6 @@ export const productDetailGetId = (id) => {
         axios.get(`${keys.baseURI}/products/single`, {params: {id: id}})
             .then(function (response) {
                 // handle success
-                console.log(response);
                 dispatch({type: PRODUCT_DETAIL_GET, payload: response.data})
             })
             .catch(function (error) {
@@ -131,7 +130,6 @@ export const contactPost = (contactData) => {
     return (dispatch) => {
         axios.post(`${keys.baseURI}/contactUs`, contactData)
             .then(function (response) {
-                console.log(response.data);
                 dispatch({type: CONTACT_POST, payload: response.data.message ? true : false})
             })
             .catch(function (error) {
@@ -140,11 +138,10 @@ export const contactPost = (contactData) => {
     }
 }
 
-export const subscriberPost = (subscriber) => {
+export const subscriberPost = (values) => {
     return (dispatch) => {
-        axios.post(`${keys.baseURI}/subscribers`, subscriber)
+        axios.post(`${keys.baseURI}/subscribers`, values)
             .then(function (response) {
-                console.log(response.data, 'lllllllllllllllllllll')
                 dispatch({type: SUBSCRIBE_POST, payload: response.data.email !== null ? true : false})
             })
             .catch(function (error) {

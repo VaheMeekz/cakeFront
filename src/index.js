@@ -27,7 +27,7 @@ i18n
         backend: {
             loadPath: '/locales/{{lng}}/translation.json'
         }
-})
+    })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -35,9 +35,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-    <BrowserRouter>
-        <Provider store={store}>
+    <Provider store={store}>
+        <BrowserRouter>
             <App/>
-        </Provider>
-    </BrowserRouter>
+        </BrowserRouter>
+    </Provider>
 );

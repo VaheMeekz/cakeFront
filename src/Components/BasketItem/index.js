@@ -22,14 +22,12 @@ const BasketItem = ({itemData, langValue}) => {
         setCount(count + 1)
         itemData.count = count + 1
         setPrice(price + itemData.price)
-        itemData.total = price + itemData.price
     }
 
     const handleClickCountDown = () => {
         setCount(count - 1)
         itemData.count = count - 1
         setPrice(price - itemData.price)
-        itemData.total = price - itemData.price
     }
 
     const deleteItem = (id) => {
@@ -89,7 +87,7 @@ const BasketItem = ({itemData, langValue}) => {
                 <td key={itemData.id} className={css.tdR}>
                     <div className={css.icons}>
                         <div className={css.iconsFlex}>
-                            {itemData.total} AMD
+                            {count * itemData.price} AMD
                         </div>
                     </div>
                 </td>

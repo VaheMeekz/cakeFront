@@ -4,15 +4,12 @@ import {Col, Container, Row} from "react-bootstrap";
 import deleveryBg from '../../Images/deleveryBg.png';
 import {useDispatch, useSelector} from "react-redux";
 import {deleveryDataGet, deleveryFooter, deleveryGet, deleveryGetValue} from "../../Store/actions/productActions";
+import Pink from "../Pink";
 
 const Delivary = ({langValue}) => {
 
-    const deleveryData = useSelector(state => state.productReducer.delevery);
     const deleveryValueData = useSelector(state => state.productReducer.deleveryValue);
-    const deleveryFooterGet = useSelector(state => state.productReducer.delevery_footer_get);
     const deleveryDataGetMain = useSelector(state => state.productReducer.deleveryDataGet);
-
-    // const delevery = deleveryFooter?.map(i => i.bannerImage)
 
     const dispatch = useDispatch();
 
@@ -87,27 +84,7 @@ const Delivary = ({langValue}) => {
 
             </div>
 
-            <div className={css.pink}>
-                <Container>
-                    <Row>
-                        <Col lg={5} md={6} xs={12}>
-                            <div className={css.bhText}>
-                                <p>Lorem ipsum dolor sit amet, consectetur </p>
-                            </div>
-                        </Col>
-                        <Col lg={7} md={6} xs={12}>
-                            <div className={css.bhInput}>
-                                <div>
-                                    <input type="text"/>
-                                </div>
-                                <div className={css.bhBtn}>
-                                    <button>Subscribe</button>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            <Pink />
 
         </div>
     );

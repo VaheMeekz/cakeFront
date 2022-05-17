@@ -10,6 +10,7 @@ import productImg from '../../Images/productBg.png';
 import {makeArray} from "../../keys";
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md';
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md';
+import Pink from "../Pink";
 
 const Product = ({langValue}) => {
 
@@ -55,9 +56,6 @@ const Product = ({langValue}) => {
         setValidated(true);
     };
 
-    console.log(productItem?.length,'++++++++++++++')
-
-
     return (
         <div>
             <div style={{
@@ -67,7 +65,8 @@ const Product = ({langValue}) => {
                 <Container fluid>
                     <Row>
                         <Col lg={3} md={4} xs={12} className="mt-5 mb-5">
-                            <ProductFilter langValue={langValue} lang={lang} setLang={setLang} search={search} setSearch={setSearch}
+                            <ProductFilter langValue={langValue} lang={lang} setLang={setLang} search={search}
+                                           setSearch={setSearch}
                                            maxValue={maxValue} minValue={minValue}
                                            categoryId={categoryId}
                                            setCategoryId={setCategoryId}
@@ -76,7 +75,7 @@ const Product = ({langValue}) => {
                         <Col lg={8} md={8} xs={12} className="mt-5 mb-5">
                             <div className={css.itemMain}>
                                 {
-                                    productItem?.map((item, productItem) => {
+                                    productItem?.map((item) => {
                                         return (
                                             <ProductItem item={item} langValue={langValue}/>
                                         )
@@ -86,39 +85,36 @@ const Product = ({langValue}) => {
                             <div>
                                 {
                                     productItem?.length < 7 ? null : <div className="pagBox">
-                                    <div>
-                                {pages.length - 1 == page ? (
-                                    // <ArrowBackIcon
-                                    //     onClick={() => {
-                                    //         setPage(page - 1);
-                                    //     }}
-                                    // />
-                                    <button onClick={() => {
-                                    setPage(page - 1);
-                                }} type="reset" className='btnArrow'><MdOutlineKeyboardArrowLeft/></button>
-                                    ) : null}
-                                    </div>
-                                {pages.length > 1 &&
-                                    pages.map((s) => {
-                                    return (
-                                    <div
-                                    className={page === s ? "ActivePagItem" : "pagItem"}
-                                    key={s}
-                                    onClick={() => {
-                                    setPage(s);
-                                }}
-                                    >
-                                {s + 1}
-                                    </div>
-                                    );
-                                })}
-                                    <div>
-                                {pages.length - 1 == page ? null : (
-                                    <button onClick={() => {
-                                    setPage(page + 1);
-                                }} type="reset" className='btnArrow'><MdOutlineKeyboardArrowRight/></button>
-                                    )}
-                                    </div>
+                                        <div>
+                                            {pages.length - 1 == page ? (
+                                                <button onClick={() => {
+                                                    setPage(page - 1);
+                                                }} type="reset" className='btnArrow'><MdOutlineKeyboardArrowLeft/>
+                                                </button>
+                                            ) : null}
+                                        </div>
+                                        {pages.length > 1 &&
+                                            pages.map((s) => {
+                                                return (
+                                                    <div
+                                                        className={page === s ? "ActivePagItem" : "pagItem"}
+                                                        key={s}
+                                                        onClick={() => {
+                                                            setPage(s);
+                                                        }}
+                                                    >
+                                                        {s + 1}
+                                                    </div>
+                                                );
+                                            })}
+                                        <div>
+                                            {pages.length - 1 == page ? null : (
+                                                <button onClick={() => {
+                                                    setPage(page + 1);
+                                                }} type="reset" className='btnArrow'><MdOutlineKeyboardArrowRight/>
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 }
 
@@ -137,12 +133,12 @@ const Product = ({langValue}) => {
                 margin: "3rem 0"
             }}>
                 {
-                    product_get?.map((item) => {
+                    product_get?.map((item, index) => {
                         return (
-                            <div className={css.productText}>
+                            <div className={css.productText} key={index}>
                                 <h1>{langValue == "en" ? item.titleEn
                                     : langValue == "ru" ? item.titleRu
-                                    : langValue == "am" ? item.titleHy : null}</h1>
+                                        : langValue == "am" ? item.titleHy : null}</h1>
                                 <p>{langValue == "en" ? item.subTitleEn
                                     : langValue == "ru" ? item.subTitleRu
                                         : langValue == "am" ? item.subTitleHy : null}</p>
@@ -151,32 +147,7 @@ const Product = ({langValue}) => {
                     })
                 }
             </div>
-            <div className={css.pink}>
-                <Container>
-                    <Row>
-                        <Col lg={5} md={6} xs={12}>
-                            <div className={css.bhText}>
-                                <p>Lorem ipsum dolor sit amet, consectetur </p>
-                            </div>
-                        </Col>
-                        <Col lg={7} md={6} xs={12}>
-                            <Form validated={validated} onSubmit={handleSubmit}>
-                                <div className={css.bhInput}>
-                                    <div className={css.inp}>
-                                        <Form.Group as={Col} controlId="validationCustom01">
-                                            <Form.Control className='p-3' required type="email" placeholder="Email"
-                                                          name="name"/>
-                                        </Form.Group>
-                                    </div>
-                                    <div className={css.bhBtn}>
-                                        <Button type="submit">Subscribe</Button>
-                                    </div>
-                                </div>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            <Pink />
         </div>
 
     );

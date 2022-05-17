@@ -75,15 +75,13 @@ const Home = () => {
                 <Row className="justify-content-md-center mt-5">
                     <Cakes langValue={langValue}/>
                 </Row>
-                <Row className="justify-content-md-center mt-5">
+                <Row className="justify-content-md-center  pb-5">
                     <CakesTwo langValue={langValue} about_home_data={about_home_data}/>
-
                 </Row>
                 <Row className="justify-content-md-center mt-5">
-                    <ChefHome langValue={langValue} about_home_data={about_home_data}/>
+                        <ChefHome langValue={langValue} about_home_data={about_home_data}/>
                 </Row>
             </Container>
-
             <div>
                 <Behind langValue={langValue}/>
             </div>

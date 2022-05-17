@@ -33,7 +33,7 @@ const WishList = () => {
             {
                 wishData.length > 0 ? <Container>
                     <Row>
-                        <Col lg={12} md={4} xs={12} className="mt-5 mb-5">
+                        <Col lg={12} md={5} xs={12} className="mt-5 mb-5">
                             <div className={css.mainFlex}>
                                 {
                                     wishData?.map((item) => {

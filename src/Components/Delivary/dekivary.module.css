@@ -172,6 +172,30 @@
 
 @media(max-width: 550px) {
     .deleveryDiv {
-        text-align: center;
+        text-align: start;
     }
+
+    .tdL {
+        border-bottom: 1px solid #C4C4C4;
+        padding: 0.5rem 1rem;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+        color: #000000;
+    }
+
+    .tdR {
+        border-right: 1px solid #C4C4C4;
+        border-bottom: 1px solid #C4C4C4;
+        padding: 0.5rem 1rem;
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+        color: #000000;
+    }
+
 }

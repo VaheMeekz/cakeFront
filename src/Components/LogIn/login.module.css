@@ -3,7 +3,7 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    margin: 4rem auto;
+    margin-top: 8rem;
 }
 
 .mediaImg img {
@@ -46,6 +46,7 @@
     font-weight: 600;
     font-size: 25px;
     line-height: 44px;
+    padding-left: 0.5rem;
     letter-spacing: -0.64px;
     color: #AC4D75;
 }
@@ -228,14 +229,24 @@
     color: red;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1300px) {
+    .mainDiv {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10rem;
+    }
+}
+
+@media (max-width: 950px) {
 
     .mainDiv {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto;
+        margin-top: 10rem;
     }
 
     .divImg {
@@ -321,7 +332,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto;
+        margin-top: 12rem;
+    }
+
+
+    .divText h1 {
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 50px;
+        line-height: 40px;
+        letter-spacing: -1.34px;
+        color: #AC4D75;
+        margin-bottom: 1rem;
     }
 
     .divImg {
@@ -392,7 +415,7 @@
         font-family: 'Playfair Display';
         font-style: normal;
         font-weight: 600;
-        font-size: 33zpx;
+        font-size: 25px;
         line-height: 44px;
         letter-spacing: -0.64px;
         color: #AC4D75;

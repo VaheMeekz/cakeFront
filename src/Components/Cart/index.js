@@ -6,10 +6,20 @@ import maserCart from '../../Images/masterCart.svg';
 import idramSvg from '../../Images/idram.svg';
 import { Formik } from 'formik';
 import {useTranslation} from "react-i18next";
+import {useDispatch, useSelector} from "react-redux";
+import {deleveryDataGet, deleveryFooter, deleveryGet, deleveryGetValue} from "../../Store/actions/productActions";
 
 const Cart = ({basketData}) => {
 
     const {t} = useTranslation();
+
+    const deleveryValueData = useSelector(state => state.productReducer.deleveryValue);
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch((deleveryDataGet()))
+    }, []);
 
     let tot = basketData?.map(i => i.total)
 
@@ -22,17 +32,17 @@ const Cart = ({basketData}) => {
     };
 
     return (
-        <div>
+        <div className={css.main}>
             <Container>
                 <Row>
-                        <div className='m-3'>
+                        <div className={css.divTwo}>
                             <h2>{t("Getintouch")}</h2>
                             <Formik
                                 initialValues={{ email: '', password: '' }}
                                 validate={values => {
                                     const errors = {};
                                     if (!values.email) {
-                                        errors.email = 'Required';
+                                        errors.email = `${t("Requerid")}!`;
                                     } else if (
                                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                     ) {
@@ -58,7 +68,7 @@ const Cart = ({basketData}) => {
                                       /* and other goodies */
                                   }) => (
                                     <form onSubmit={handleSubmit} className='formFlex'>
-                                            <div>
+                                            <div >
                                                 <div className={css.nameInp}>
                                                     <div>
                                                         <label htmlFor="firstName">{t("FirstName")}</label>
@@ -142,10 +152,15 @@ const Cart = ({basketData}) => {
                                                 <div className={css.divInp}>
                                                     <label htmlFor="State">{t("State")}</label> <br/>
                                                     <select name="State" id="State">
-                                                        <option value="volvo">Volvo</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="mercedes">Mercedes</option>
-                                                        <option value="audi">Audi</option>
+                                                        {
+                                                            deleveryValueData?.map((item) => {
+                                                                return (
+                                                                    <option value="volvo">
+                                                                        <span>{item.loacation}-{item.price}</span>
+                                                                    </option>
+                                                                )
+                                                            })
+                                                        }
                                                     </select>
                                                 </div>
                                             </div>
@@ -218,10 +233,15 @@ const Cart = ({basketData}) => {
                                                     <div className={css.divInp}>
                                                         <label htmlFor="State">{t("State")}</label> <br/>
                                                         <select name="State" id="State" disabled={isDisabled}>
-                                                            <option value="volvo">Volvo</option>
-                                                            <option value="saab">Saab</option>
-                                                            <option value="mercedes">Mercedes</option>
-                                                            <option value="audi">Audi</option>
+                                                            {
+                                                                deleveryValueData?.map((item) => {
+                                                                    return (
+                                                                        <option value="volvo">
+                                                                            <span>{item.loacation}-{item.price}</span>
+                                                                        </option>
+                                                                    )
+                                                                })
+                                                            }
                                                         </select>
                                                     </div>
                                                     <div className={css.divInpTexterea}>
@@ -266,8 +286,6 @@ const Cart = ({basketData}) => {
                                                     <input type="radio" id="html2" name="fav_language" value="HTML" />
                                                     <label htmlFor="html2">{t("Cashondelivery")}</label>
                                                 </div>
-                                                <img src={visaSvg} alt=""/>
-                                                <img src={maserCart} alt=""/>
                                                 <img src={idramSvg} alt=""/>
                                             </div>
                                         </div>

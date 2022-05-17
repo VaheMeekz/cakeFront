@@ -4,6 +4,7 @@ import {Col} from "react-bootstrap";
 import {BsDash} from 'react-icons/bs';
 import cofeHomeImg from '../../../Images/cofeHome.png'
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 const CakesTwo = ({about_home_data, langValue}) => {
 
@@ -11,7 +12,7 @@ const CakesTwo = ({about_home_data, langValue}) => {
 
     return (
         <>
-            <Col lg={6} md={6} xs={12} className='pt-5'>
+            <Col lg={6} md={6} xs={12}>
 
                 <div className={css.divOne}>
                     {
@@ -22,7 +23,7 @@ const CakesTwo = ({about_home_data, langValue}) => {
                                         langValue == 'am' ? item.titleHy : null}</h2>
                                     <p>{langValue == 'en' ? item.textEn : langValue == 'ru' ? item.textRu :
                                         langValue == 'am' ? item.textHy : null}</p>
-                                    <button>{t("Seemore")}</button>
+                                    <button><Link to={'/about'}>{t("Seemore")}</Link></button>
                                 </div>
                             )
                         })
@@ -31,7 +32,7 @@ const CakesTwo = ({about_home_data, langValue}) => {
 
             </Col>
 
-            <Col lg={6} md={6} xs={12} className='pt-5'>
+            <Col lg={6} md={6} xs={12}>
                 <div className={css.homeCofe}>
                     <img src={cofeHomeImg} alt=""/>
                 </div>

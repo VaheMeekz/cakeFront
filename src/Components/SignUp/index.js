@@ -42,7 +42,6 @@ const SignUp = () => {
                                         <h1>{t("SignUp")}</h1>
                                         <img src={chefWoman} alt=""/>
                                     </div>
-                                    <h2>{t("Welcomebackto")}<span>{t("Companyname")}</span></h2>
                                 </div>
                                 <Formik
                                     initialValues={{email: '', password: '', name: ''}}
@@ -51,19 +50,19 @@ const SignUp = () => {
                                         if (!values.email) {
                                             errors.email = Swal.fire({
                                                 icon: 'error',
-                                                title: 'Oops...',
-                                                text: 'Requerid!',
+                                                title: `${t("Oops")}...`,
+                                                text: `${t("Requerid")}!`,
                                             });
                                             errors.email = ''
                                         } else if(!values.name) {
-                                            errors.name = 'Requerid!'
+                                            errors.name = `${t("Requerid")}!`
                                         }
                                         else if (!values.password) {
-                                            errors.password = 'Required';
+                                            errors.password = `${t("Requerid")}!`;
                                         } else if (
                                             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                         ) {
-                                            errors.email = 'Invalid email address';
+                                            errors.email = `${t("Invalidemailaddress")}`;
                                         }
                                         return errors;
                                     }}
@@ -78,7 +77,7 @@ const SignUp = () => {
                                             Swal.fire({
                                                 position: 'center',
                                                 icon: 'success',
-                                                title: 'Email Success',
+                                                title: `${t("EmailSuccess")}`,
                                                 showConfirmButton: false,
                                                 timer: 1500
                                             })
@@ -98,48 +97,48 @@ const SignUp = () => {
                                         <form onSubmit={handleSubmit} onChange={handleChangeForm}
                                               className={css.formDiv}>
                                             <input
+                                                placeholder={t("Name")}
                                                 type="text"
                                                 name="name"
                                                 onChange={handleChange}
-                                                onBlur={handleBlur}
                                                 value={values.name}
                                             />
                                             <span
                                                 className={css.err}>{errors.name && touched.name && errors.name}
                                             </span>
                                             <input
+                                                placeholder={t("Email")}
                                                 type="email"
                                                 name="email"
                                                 onChange={handleChange}
-                                                onBlur={handleBlur}
                                                 value={values.email}
                                             />
                                             <span
                                                 className={css.err}>{errors.email && touched.email && errors.email}
                                             </span>
                                             <input
+                                                placeholder={t("Password")}
                                                 type="password"
                                                 name="password"
                                                 onChange={handleChange}
-                                                onBlur={handleBlur}
                                                 value={values.password}
                                             />
                                             <span className={css.err}>
                                             {errors.password && touched.password && errors.password}
                                             </span>
-                                            <div className={css.forgetDiv}>
-                                                <label className={css.checkbox}>
-                                                    <input type="checkbox"/>
-                                                    <span>{t("Rememberme")}</span>
-                                                </label>
-                                                <Link to='/contact'>Forget Password?</Link>
-                                            </div>
+                                            {/*<div className={css.forgetDiv}>*/}
+                                            {/*    <label className={css.checkbox}>*/}
+                                            {/*        <input type="checkbox"/>*/}
+                                            {/*        <span>{t("Rememberme")}</span>*/}
+                                            {/*    </label>*/}
+                                            {/*    <Link to='/contact'>{t("ForgetPassword")}</Link>*/}
+                                            {/*</div>*/}
                                             <button className={css.btnDiv} type="submit" disabled={isSubmitting}>
-                                                {t("Login")}
+                                                {t("Register")}
                                             </button>
                                             <div className={css.started}>
-                                                <span>Don’t have an account?</span>
-                                                <Link to='/sign_up'>Get Started</Link>
+                                                <span>{t("Donthaveanaccount")}</span>
+                                                {/*<Link to='/sign_up'>{t("GetStartedy7")}</Link>*/}
                                             </div>
                                         </form>
                                     )}

@@ -38,7 +38,7 @@
 }
 
 .divMain button:hover {
-    background: #774276;
+    background: #b726b5;
     box-shadow: -5px 7px 16px rgba(255, 255, 255, 0.1);
     border-radius: 17px;
     border: none;
@@ -50,6 +50,11 @@
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
+}
+
+.divMain button a:hover {
+    color: #FFFFFF;
+    transition: 0.5s;
 }
 
 .aboutZet {
@@ -88,7 +93,7 @@
     max-width: 90%;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
     .homeMainAbout h2 {
         font-family: 'Roboto Slab';
         font-style: normal;
@@ -99,12 +104,12 @@
     }
 
     .homeMainAbout p {
-        text-indent: 25px;
+        text-indent: 0;
         font-family: 'Roboto Slab';
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
-        line-height: 34px;
+        line-height: 30px;
         color: #000000 !important;
         max-width: 90%;
     }
@@ -138,7 +143,7 @@
     }
 
     .homeMainAbout p {
-        text-indent: 25px;
+        text-indent: 0;
         font-family: 'Roboto Slab';
         font-style: normal;
         font-weight: 400;

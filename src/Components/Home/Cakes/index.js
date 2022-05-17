@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import {MdArrowBackIosNew} from 'react-icons/md';
 import {MdArrowForwardIos} from 'react-icons/md';
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 const Cakes = ({langValue}) => {
 
@@ -80,10 +81,12 @@ const Cakes = ({langValue}) => {
                     productData?.map((item) => {
                         return (
                             <Col lg={4}>
-                                <div className={css.productMain}>
+                                <div className={css.productMain} key={item.id}>
                                     <div className={css.cakesDiv}/>
                                     <div className={css.position}>
-                                        <img src={item.image} alt=""/>
+                                        <Link to={"/product/" + item.id}>
+                                            <img src={item.image} alt=""/>
+                                        </Link>
                                         <h3>{langValue == 'en' ? item.nameEn : langValue == 'ru' ? item.nameRu
                                             : langValue == 'am' ? item.nameHy : null}</h3>
                                     </div>

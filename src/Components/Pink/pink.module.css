@@ -5,7 +5,7 @@
 }
 
 .bhText {
-    text-align: end;
+    text-align: center;
 }
 
 .bhText p {
@@ -39,12 +39,14 @@
     border-radius: 12px;
     border: none;
     text-indent: 10px;
+    z-index: -20;
 }
 
 .bhBtn {
     position: absolute;
     top: 12%;
     right: 3%;
+    z-index: 10;
 }
 
 .bhBtn button {

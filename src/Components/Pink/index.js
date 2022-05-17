@@ -6,22 +6,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {productReducer} from "../../Store/reducers/productReducer";
 import { Formik } from 'formik';
 import Swal from 'sweetalert2'
+import axios from "axios";
+import keys from "../../keys";
+import {SUBSCRIBE_POST} from "../../Store/types";
+import {useTranslation} from "react-i18next";
 
 const Pink = () => {
 
-    const subscribeError = useSelector(state => state.productReducer.subscribe);
-
-
-    const [validated, setValidated] = useState(false);
-    const [subscriber, setSubscriber] = useState({name: ''})
-
     const dispatch = useDispatch();
 
-
-    const handleChange = (e) => {
-        subscriber["email"] = e.target.value;
-        setSubscriber(subscriber)
-    }
+    const {t} = useTranslation();
 
     return (
         <div className={css.pink}>
@@ -29,19 +23,19 @@ const Pink = () => {
                 <Row>
                     <Col lg={5} md={6} xs={12}>
                         <div className={css.bhText}>
-                            <p>Lorem ipsum dolor sit amet, consectetur </p>
+                            <p>{t("Sendyouremailaddress")}</p>
                         </div>
                     </Col>
                     <Col lg={7} md={6} xs={12}>
                         <Formik
-                            initialValues={{ email: '', password: '' }}
+                            initialValues={{ email: ''}}
                             validate={values => {
                                 const errors = {};
                                 if (!values.email) {
                                     errors.email = Swal.fire({
                                         icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'Requerid!',
+                                        title: `${t("Oops")}...`,
+                                        text: `${t("Requerid")}`,
                                     });
                                     errors.email = ''
                                 } else if (
@@ -53,16 +47,19 @@ const Pink = () => {
                             }}
                             onSubmit={(values, { setSubmitting }) => {
                                 setTimeout(() => {
-                                    dispatch(subscriberPost(subscriber))
-                                    setSubmitting(false);
-                                    values.email= ''
+                                    axios.post(`${keys.baseURI}/subscribers`, values)
+                                        .then(function (response) {
+                                            dispatch({type: SUBSCRIBE_POST, payload: response.data.email !== null ? true : false})
+                                        })
+                                        .catch(function (error) {
+                                            console.log(error);
+                                        });
+                                    values.email = ''
                                     Swal.fire({
-                                        position: 'center',
                                         icon: 'success',
-                                        title: 'Email Success',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    })
+                                        title: 'Success',
+                                    });
+                                    setSubmitting(false);
                                 }, 400);
                             }}
                         >
@@ -76,20 +73,21 @@ const Pink = () => {
                                   isSubmitting,
                                   /* and other goodies */
                               }) => (
-                                <form onSubmit={handleSubmit} onChange={handleChange}>
+                                <form onSubmit={handleSubmit}>
                                     <div className={css.bhInput}>
                                         <div className={css.inp}>
                                             <input
                                                 type="email"
                                                 name="email"
+                                                placeholder={t("Email")}
                                                 onChange={handleChange}
-                                                onBlur={handleBlur}
+                                                // onBlur={handleBlur}
                                                 value={values.email}
                                             />
                                         </div>
                                         <div className={css.bhBtn}>
                                             <button type="submit" disabled={isSubmitting}>
-                                                Subscribe
+                                                {t("Subscribe")}
                                             </button>
                                         </div>
                                     </div>

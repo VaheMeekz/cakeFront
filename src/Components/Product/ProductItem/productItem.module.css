@@ -138,7 +138,7 @@
 }
 
 .itemDiv button:hover {
-    background: rgba(59, 12, 58, 0.68);
+    background: #3B0C3A;
     border-radius: 6px;
     font-family: 'Poppins';
     font-style: normal;
@@ -150,17 +150,35 @@
     border: none;
     padding: 0.5rem 1rem;
     margin-bottom: 0.8rem;
-    transition: 0.8s;
+    transition: 0.5s;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1300px) {
+    .dropdown_content {
+        display: none;
+        position: absolute;
+        top: 25%;
+        right: 35%;
+        z-index: 1;
+        width: 100%;
+        text-align: end;
+    }
 
     .dropdown {
-        height: 12vh;
+        height: 30vh;
     }
 
     .dropdown a img {
         height: 100%;
+    }
+
+    .dropdown:hover {
+        width: 100%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        height: 30vh;
+        opacity: 0.5;
+        transition: 0.8s;
     }
 
     .itemDiv {
@@ -193,16 +211,127 @@
         transition: 0.5s;
     }
 
+    .itemDiv button:hover {
+        background: #9b209a;
+        border-radius: 6px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20px;
+        text-align: center;
+        color: #FFFFFF;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.8rem;
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 950px) {
+
+    .dropdown_content {
+        display: none;
+        position: absolute;
+        top: 10%;
+        right: 28%;
+        z-index: 1;
+        width: 100%;
+        text-align: end;
+    }
+
+    .dropdown {
+        height: 14vh;
+    }
+
+    .dropdown a img {
+        height: 100%;
+    }
+
+    .dropdown:hover {
+        width: 100%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        height: 14vh;
+        opacity: 0.5;
+        transition: 0.8s;
+    }
+
+    .itemDiv {
+        margin: 0.8rem;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFFFFF;
+        box-shadow: 5px 0px 5px rgba(116, 117, 130, 0.2), -5px 5px 2px rgba(116, 117, 130, 0.2);
+        border-radius: 10px;
+        height: auto;
+        position: relative;
+    }
+
+    .itemDiv button {
+        background: #3B0C3A;
+        border-radius: 6px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20px;
+        text-align: center;
+        color: #FFFFFF;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.8rem;
+        transition: 0.5s;
+    }
+
+    .itemDiv button:hover {
+        background: #9b209a;
+        border-radius: 6px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20px;
+        text-align: center;
+        color: #FFFFFF;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.8rem;
+        transition: 0.5s;
+    }
+
 }
 
 @media (max-width: 550px) {
 
-    .dropdown {
-        height: 25vh;
+    .dropdown_content {
+        display: none;
+        position: absolute;
+        top: 20%;
+        right: 33%;
+        z-index: 1;
+        width: 100%;
+        text-align: end;
     }
 
-    dropdown a img {
+    .dropdown {
+        height: 30vh;
+    }
+
+    .dropdown a img {
         height: 100%;
+    }
+
+    .dropdown:hover {
+        width: 100%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        height: 30vh;
+        opacity: 0.5;
+        transition: 0.8s;
     }
 
     .itemDiv {
@@ -220,6 +349,22 @@
     }
 
     .itemDiv button {
+        background: #3B0C3A;
+        border-radius: 6px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+        color: #FFFFFF;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.8rem;
+        transition: 0.5s;
+    }
+
+    .itemDiv button:hover {
         background: #3B0C3A;
         border-radius: 6px;
         font-family: 'Poppins';

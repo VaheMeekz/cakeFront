@@ -7,6 +7,7 @@ import ProductDelevriData from "./ProductDelevriData";
 import {detailFooter, productDetailGetId, productGet} from "../../Store/actions/productActions";
 import css from "../Product/product.module.css";
 import {useTranslation} from "react-i18next";
+import Pink from "../Pink";
 
 
 const ProductDetail = ({langValue}) => {
@@ -20,8 +21,8 @@ const ProductDetail = ({langValue}) => {
 
     const productDataDetailFooterImage = productDataDetailFooter?.map(i => i.image)
 
-    const add = productDataDetail?.map(i => i.adition_info_en?.split(','))
-    const addPrice = productDataDetail?.map(i => i.addition_info_value?.split(','))
+    const add = productDataDetail?.map(i => i?.adition_info_en?.split(','))
+    const addPrice = productDataDetail?.map(i => i?.addition_info_value?.split(','))
 
     const dispatch = useDispatch();
 
@@ -44,7 +45,7 @@ const ProductDetail = ({langValue}) => {
     };
 
     return (
-        <div>
+        <div className={css.main}>
 
             <Container>
                 <Row>
@@ -67,25 +68,25 @@ const ProductDetail = ({langValue}) => {
                     </Col>
                     <Col lg={10} md={12} xs={12} className='mt-5'>
                         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-                            <Tab eventKey="home" title="Description">
+                            <Tab eventKey="home" title={t("Description")}>
                                 {
-                                    productDataDetail?.map((item) => {
+                                    productDataDetail?.map((item, index) => {
                                         return (
-                                            <p className={css.descText}>{
+                                            <p className={css.descText} key={index}>{
                                                 langValue == "en" ? item.long_description_en
-                                                : langValue == "ru" ? item.long_description_ey
-                                                : langValue == "am" ? item.long_description_hy : null}
+                                                    : langValue == "ru" ? item.long_description_ey
+                                                        : langValue == "am" ? item.long_description_hy : null}
                                             </p>
                                         )
                                     })
                                 }
                             </Tab>
-                            <Tab eventKey="profile" title="Additional Information">
+                            <Tab eventKey="profile" title={t("AdditionalInformation")}>
                                 <table className={css.tableDetail}>
                                     {
                                         add[0]?.map((item, index) => {
                                             return (
-                                                <tr>
+                                                <tr key={index}>
                                                     <td>{item}</td>
                                                     <td>{addPrice[0][index]}</td>
                                                 </tr>
@@ -108,9 +109,9 @@ const ProductDetail = ({langValue}) => {
                 margin: "3rem 0"
             }}>
                 {
-                    productDataDetailFooter?.map((item) => {
+                    productDataDetailFooter?.map((item, index) => {
                         return (
-                            <div className={css.productText}>
+                            <div className={css.productText} key={index}>
                                 <h1>{langValue == "en" ? item.titleEn
                                     : langValue == "ru" ? item.titleRu
                                         : langValue == "am" ? item.titleHy : null}</h1>
@@ -122,32 +123,9 @@ const ProductDetail = ({langValue}) => {
                     })
                 }
             </div>
-            <div className={css.pink}>
-                <Container>
-                    <Row>
-                        <Col lg={5} md={6} xs={12}>
-                            <div className={css.bhText}>
-                                <p>Lorem ipsum dolor sit amet, consectetur </p>
-                            </div>
-                        </Col>
-                        <Col lg={7} md={6} xs={12}>
-                            <Form validated={validated} onSubmit={handleSubmit}>
-                                <div className={css.bhInput}>
-                                    <div className={css.inp}>
-                                        <Form.Group as={Col} controlId="validationCustom01">
-                                            <Form.Control className='p-3' required type="email" placeholder="Email"
-                                                          name="name"/>
-                                        </Form.Group>
-                                    </div>
-                                    <div className={css.bhBtn}>
-                                        <Button type="submit">{t("Subscribe")}</Button>
-                                    </div>
-                                </div>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            {/*Pink*/}
+            <Pink/>
+            {/*Pink*/}
 
         </div>
     );

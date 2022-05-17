@@ -1,4 +1,6 @@
 export default {
+    // baseURI: 'http://shtapautovacharq.am/api',
+    // baseURI: 'http://localhost:5000/api',
     // baseURI: 'http://localhost:5000/api/v1',
     baseURI: 'https://newcake.herokuapp.com/api/v1',
     FAVORITE_LIST: 'AUTO-FAVORITES',

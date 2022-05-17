@@ -1,9 +1,10 @@
 .mainDiv {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
-    margin: 4rem auto;
+    height: 90vh;
+    padding-top: 5rem;
 }
 
 .mediaImg img {
@@ -382,12 +383,22 @@
 
 @media (max-width: 550px) {
 
+    .divText h1 {
+        font-family: 'Roboto Slab';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 50px;
+        line-height: 45px;
+        letter-spacing: -1.34px;
+        color: #AC4D75;
+    }
+
     .mainDiv {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto;
+        height: 80vh;
     }
 
     .divImg {

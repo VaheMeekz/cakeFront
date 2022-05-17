@@ -73,3 +73,30 @@
     cursor: pointer;
     transition: 0.8s;
 }
+
+@media(max-width: 950px) {
+    .countData {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #3B0C3A;
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
+}
+
+
+@media(max-width: 550px) {
+    .countData {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #3B0C3A;
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
+}

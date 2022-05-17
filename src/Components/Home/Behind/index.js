@@ -44,7 +44,6 @@ const Behind = ({langValue}) => {
                                                     : langValue == 'am' ? item.titleHy : null}</h1>
                                                 <p>{langValue == 'en' ? item.subTitleEn : langValue == 'ru' ? item.subTitleRu
                                                     : langValue == 'am' ? item.subTitleHy : null}}</p>
-                                                <button>{t("Seemore")}</button>
                                             </div>
                                         </div>
                                     </Col>

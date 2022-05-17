@@ -32,7 +32,6 @@ const ContactUs = () => {
         setContactData(contactData)
     }
 
-    console.log(contactUs,'+++++++++++++++++++++++++')
 
     return (
         <div>
@@ -46,18 +45,13 @@ const ContactUs = () => {
                                 validate={values => {
                                     const errors = {};
                                     if (!values.email) {
-                                        errors.email = Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'Requerid!',
-                                        });
-                                        errors.email = ''
+                                        errors.email = `${t("Requerid")}!`
                                     } else if (!values.name) {
-                                        errors.name = 'Required';
+                                        errors.name = `${t("Requerid")}!`;
                                     } else if (!values.subject) {
-                                        errors.subject = 'Required';
+                                        errors.subject = `${t("Requerid")}!`;
                                     } else if (!values.message) {
-                                        errors.message = 'Required';
+                                        errors.message = `${t("Requerid")}!`;
                                     } else if (
                                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                     ) {
@@ -75,7 +69,7 @@ const ContactUs = () => {
                                         Swal.fire({
                                             position: 'center',
                                             icon: 'success',
-                                            title: 'Contact Success',
+                                            title: `${t("ContactSuccess")}`,
                                             showConfirmButton: false,
                                             timer: 1500
                                         })
@@ -97,10 +91,9 @@ const ContactUs = () => {
                                             type="text"
                                             name="name"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
                                             value={values.name}
                                             className={css.inpDiv}
-                                            placeholder={t("Invalidemailaddress")}
+                                            placeholder={t("Name")}
                                         />
                                         <span className={css.err}>{errors.name && touched.name && errors.name}</span>
 
@@ -108,7 +101,6 @@ const ContactUs = () => {
                                             type="email"
                                             name="email"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
                                             value={values.email}
                                             className={css.inpDiv}
                                             placeholder={t("Email")}
@@ -121,7 +113,6 @@ const ContactUs = () => {
                                             type="text"
                                             name="subject"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
                                             value={values.subject}
                                             className={css.inpDiv}
                                             placeholder={t("Subject")}
@@ -133,7 +124,6 @@ const ContactUs = () => {
                                             type="text"
                                             name="message"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
                                             value={values.message}
                                             className={css.texterea}
                                             placeholder={t("Message")}
@@ -156,20 +146,22 @@ const ContactUs = () => {
                                 {
                                     contactUs?.map((item) => {
                                         return (
-                                            <>
+                                            <section className={css.sec}>
                                                 <div>
                                                     <img src={contactLoaction} width="40" height="50" alt=""/>
                                                     <p>{item.location}</p>
                                                 </div>
                                                 <div>
-                                                    <img src={contactTel} width="40" height="40" alt=""/>
-                                                    <p>{item.phone}</p>
+                                                    <a href={`tel:${item.phone}`}>
+                                                        <img src={contactTel} width="40" height="40" alt=""/>
+                                                        <p>{item.phone}</p>
+                                                    </a>
                                                 </div>
                                                 <div>
-                                                    <img src={contactEmail} width="40" height="40" alt=""/>
+                                                    <img className={css.emailImage} src={contactEmail} width="20" height="40" alt=""/>
                                                     <p>{item.email}</p>
                                                 </div>
-                                            </>
+                                            </section>
                                         )
                                     })
                                 }

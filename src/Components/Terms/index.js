@@ -17,9 +17,9 @@ const Terms = ({langValue}) => {
     }, [])
 
     return (
-        <div>
+        <div className={css.main}>
             <Container>
-                <Row className='p-5'>
+                <Row>
                     {
                         termsData?.map((item) => {
                             return (

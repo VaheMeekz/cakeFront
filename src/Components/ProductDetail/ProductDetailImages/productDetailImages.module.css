@@ -40,3 +40,23 @@
         transition: 0.5s;
     }
 }
+
+@media(max-width: 550px) {
+    .mainImages div img {
+        width: 20%;
+        height: 8vh;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+}
+
+@media(max-width: 330px) {
+    .mainImages div img {
+        width: 22%;
+        height: 12vh;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+}

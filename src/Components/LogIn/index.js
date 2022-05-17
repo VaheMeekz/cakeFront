@@ -4,7 +4,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import chefWoman from '../../Images/chefWomen.png';
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {loginPost, signUpPost} from "../../Store/actions/productActions";
+import {loginPost, profileGet, signUpPost} from "../../Store/actions/productActions";
 import {Formik} from 'formik';
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
@@ -16,6 +16,8 @@ const LogIn = () => {
 
     const {t} = useTranslation();
 
+    const dispatch = useDispatch();
+
     let navigate = useNavigate();
 
     const [checked, setChecked] = useState(false);
@@ -25,6 +27,10 @@ const LogIn = () => {
         setChecked(!checked)
         checkVal.val = !checkVal.val
         setCheckVal(checkVal)
+    }
+
+    const loginHandler = data => {
+
     }
 
     return (
@@ -39,7 +45,6 @@ const LogIn = () => {
                                         <h1>{t("Login")}</h1>
                                         <img src={chefWoman} alt=""/>
                                     </div>
-                                    <h2>{t("Welcomebackto")}<span>{t("Companyname")}</span></h2>
                                 </div>
                                 <Formik
                                     initialValues={{email: '', password: ''}}
@@ -48,12 +53,12 @@ const LogIn = () => {
                                         if (!values.email) {
                                             errors.email = Swal.fire({
                                                 icon: 'error',
-                                                title: 'Oops...',
-                                                text: 'Requerid!',
+                                                title: `${t("Oops")}...`,
+                                                text: `${t("Requerid")}!`,
                                             });
                                             errors.email = ''
                                         } else if (!values.password) {
-                                            errors.password = 'Required';
+                                            errors.password = `${t("Requerid")}!`;
                                         } else if (
                                             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                                         ) {
@@ -69,24 +74,31 @@ const LogIn = () => {
                                                         if (checkVal && checkVal.val !== false) {
                                                             localStorage.setItem('Auth',
                                                                 JSON.stringify({
-                                                                    name: response.data.name,
-                                                                    email: response.data.email,
+                                                                    token: response.data.token
+                                                                }));
+                                                            dispatch(profileGet(response.data.token))
+                                                            document.cookie = "Rename" + "=" + JSON.stringify({
+                                                                token: response.data.token
+                                                            }) + ";" + 'localhost' + ";path=/";
+
+                                                            navigate('/')
+                                                            Swal.fire({
+                                                                position: 'center',
+                                                                icon: 'success',
+                                                                title: `${t("EmailSuccess")}`,
+                                                                showConfirmButton: false,
+                                                                timer: 1500
+                                                            })
+                                                        } else {
+                                                            localStorage.setItem('Auth',
+                                                                JSON.stringify({
                                                                     token: response.data.token
                                                                 }));
                                                             navigate('/')
                                                             Swal.fire({
                                                                 position: 'center',
                                                                 icon: 'success',
-                                                                title: 'Email Success',
-                                                                showConfirmButton: false,
-                                                                timer: 1500
-                                                            })
-                                                        } else {
-                                                            navigate('/')
-                                                            Swal.fire({
-                                                                position: 'center',
-                                                                icon: 'success',
-                                                                title: 'Email Success',
+                                                                title: `${t("EmailSuccess")}`,
                                                                 showConfirmButton: false,
                                                                 timer: 1500
                                                             })
@@ -99,7 +111,7 @@ const LogIn = () => {
                                                         Swal.fire({
                                                             position: 'center',
                                                             icon: 'error',
-                                                            title: 'Error',
+                                                            title: `${t("Error")}`,
                                                             showConfirmButton: false,
                                                             timer: 1500
                                                         })
@@ -124,6 +136,7 @@ const LogIn = () => {
                                         <form onSubmit={handleSubmit}
                                               className={css.formDiv}>
                                             <input
+                                                placeholder={t("Email")}
                                                 type="email"
                                                 name="email"
                                                 onChange={handleChange}
@@ -133,6 +146,7 @@ const LogIn = () => {
                                             <span
                                                 className={css.err}>{errors.email && touched.email && errors.email}</span>
                                             <input
+                                                placeholder={t("Password")}
                                                 type="password"
                                                 name="password"
                                                 onChange={handleChange}
@@ -144,7 +158,8 @@ const LogIn = () => {
                                             </span>
                                             <div className={css.forgetDiv}>
                                                 <label className={css.checkbox}>
-                                                    <input type="checkbox" onChange={handleCheck} value={checkVal.val} checked={checked}/>
+                                                    <input type="checkbox" onChange={handleCheck} value={checkVal.val}
+                                                           checked={checked}/>
                                                     <span>{t("Rememberme")}</span>
                                                 </label>
                                                 <Link to='/forget_password'>{t("ForgetPassword")}</Link>

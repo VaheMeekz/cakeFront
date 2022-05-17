@@ -1,7 +1,7 @@
 import React from 'react';
 import css from "./ProductFilter/productFilter.module.css";
 
-const CheckCategory = ({item, index, langValue, setCheck, check, handleChangeCheckBox}) => {
+const CheckCategory = ({item, index, langValue, handleChangeCheckBox}) => {
 
     return (
         <span>
