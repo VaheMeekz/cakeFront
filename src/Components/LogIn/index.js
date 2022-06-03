@@ -29,10 +29,6 @@ const LogIn = () => {
         setCheckVal(checkVal)
     }
 
-    const loginHandler = data => {
-
-    }
-
     return (
         <div>
             <Container>

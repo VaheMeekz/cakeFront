@@ -35,92 +35,85 @@ const Footer = () => {
     }
 
     return (
-        <div>
-            <div className={css.footerMain}>
-                <Container>
-                    <Row className="justify-content-md-center">
-                        <Col md={4} lg={4} xs={12}>
-                            <div className={css.col}>
-                                <h1>LOGO</h1>
-                                <p>The production of COMPANY is distinguished by elegant taste and great design</p>
-                                <div>
-                                    {
-                                        contactUsData?.map((item) => {
-                                            return (
-                                                <i className={css.icons}>
-                                                    <a href={`${item.facebook}`} target={"_blank"} className={css.tel}>
-                                                        <i>
-                                                            <AiFillFacebook/>
-                                                        </i>
-                                                    </a></i>
-                                            )
-                                        })
-                                    }
-                                    {
-                                        contactUsData?.map((item) => {
-                                            return (
-                                                <i className={css.icons}>
-                                                    <a href={`${item.instagram}`} target={"_blank"} className={css.tel}>
-                                                        <i>
-                                                            <FiInstagram/>
-                                                        </i>
-                                                    </a></i>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        </Col>
-                        <Col md={4} lg={4} xs={12}>
-                            <div className={css.colLi}>
-                                <h2>{t('Information')}</h2>
-                                <ul>
-                                    {
-                                        profileType?.length ?
-                                            <li><Link onClick={clickToUp} to={'/profile'}>{t("Myprofile")}</Link></li>
-                                            : null
-                                    }
-                                    <li><Link onClick={clickToUp} to={'/delivary'}>{t("delivary")}</Link></li>
-                                    <li><Link onClick={clickToUp} to='/terms'>{t("Termsandconditions")}</Link></li>
-                                    <li onClick={clickToUp}>{t("PrivacyPolicy")}</li>
-                                </ul>
-                            </div>
-                        </Col>
-                        <Col md={4} lg={4} xs={12}>
-                            <div className={css.colLi}>
-                                <h2>{t("ContactInfo")}</h2>
+        <div className={css.footerMain}>
+            <Container>
+                <Row className="justify-content-md-center">
+                    <Col md={4} lg={4} xs={12}>
+                        <div className={css.col}>
+                            <h1>LOGO</h1>
+                            <p>The production of COMPANY is distinguished by elegant taste and great design</p>
+                            <div>
                                 {
-                                    contactUsData?.map((item, index) => {
+                                    contactUsData?.map((item) => {
                                         return (
-                                            <ul key={index}>
-                                                <li onClick={clickToUp}><i><GoLocation/></i>{item.location}</li>
-                                                <li>
-                                                    <a onClick={clickToUp} href={`tel:${item.phone}`}>
-                                                        <i>
-                                                            <BsTelephone/>
-                                                        </i>
-                                                        {item.phone}
-                                                    </a>
-                                                </li>
-                                                <li><a onClick={clickToUp} href={`mailto:${item.email}`}>
+                                            <i className={css.icons}>
+                                                <a href={`${item.facebook}`} target={"_blank"} className={css.tel}>
                                                     <i>
-                                                        <AiOutlineMail/>
+                                                        <AiFillFacebook/>
                                                     </i>
-                                                    {item.email}
-                                                </a></li>
-                                            </ul>
+                                                </a></i>
+                                        )
+                                    })
+                                }
+                                {
+                                    contactUsData?.map((item) => {
+                                        return (
+                                            <i className={css.icons}>
+                                                <a href={`${item.instagram}`} target={"_blank"} className={css.tel}>
+                                                    <i>
+                                                        <FiInstagram/>
+                                                    </i>
+                                                </a></i>
                                         )
                                     })
                                 }
                             </div>
-                        </Col>
-                    </Row>
-
-                </Container>
-            </div>
-            <div className={css.bottomBox}>
-                <div>ARMCODING</div>
-            </div>
+                        </div>
+                    </Col>
+                    <Col md={4} lg={4} xs={12}>
+                        <div className={css.colLi}>
+                            <h2>{t('Information')}</h2>
+                            <ul>
+                                {
+                                    profileType?.length ? <li><Link onClick={clickToUp} to={'/profile'}>{t("Myprofile")}</Link></li>
+                                        : null
+                                }
+                                <li><Link onClick={clickToUp} to={'/delivary'}>{t("delivary")}</Link></li>
+                                <li><Link onClick={clickToUp} to='/terms'>{t("Termsandconditions")}</Link></li>
+                                <li onClick={clickToUp}>{t("PrivacyPolicy")}</li>
+                            </ul>
+                        </div>
+                    </Col>
+                    <Col md={4} lg={4} xs={12}>
+                        <div className={css.colLi}>
+                            <h2>{t("ContactInfo")}</h2>
+                            {
+                                contactUsData?.map((item, index) => {
+                                    return (
+                                        <ul key={index}>
+                                            <li onClick={clickToUp}><i><GoLocation/></i>{item.location}</li>
+                                            <li>
+                                                <a onClick={clickToUp} href={`tel:${item.phone}`}>
+                                                    <i>
+                                                        <BsTelephone/>
+                                                    </i>
+                                                    {item.phone}
+                                                </a>
+                                            </li>
+                                            <li><a onClick={clickToUp} href={`mailto:${item.email}`}>
+                                                <i>
+                                                    <AiOutlineMail/>
+                                                </i>
+                                                {item.email}
+                                            </a></li>
+                                        </ul>
+                                    )
+                                })
+                            }
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 };

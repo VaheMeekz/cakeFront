@@ -134,13 +134,3 @@
         font-size: 22px;
     }
 }
-
-.bottomBox{
-    width: 100%;
-    padding: 10px;
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
