@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import css from './pink.module.css'
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {contactPost, subscriberPost} from "../../Store/actions/productActions";
-import {useDispatch, useSelector} from "react-redux";
-import {productReducer} from "../../Store/reducers/productReducer";
+import { Col, Container, Row} from "react-bootstrap";
+import {useDispatch} from "react-redux";
 import { Formik } from 'formik';
 import Swal from 'sweetalert2'
 import axios from "axios";

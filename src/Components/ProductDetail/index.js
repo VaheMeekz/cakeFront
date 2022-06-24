@@ -23,7 +23,6 @@ const ProductDetail = ({langValue}) => {
 
     const add = productDataDetail?.map(i => i?.adition_info_en?.split(','))
     const addPrice = productDataDetail?.map(i => i?.addition_info_value?.split(','))
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,18 +30,6 @@ const ProductDetail = ({langValue}) => {
         dispatch(productDetailGetId(id))
         dispatch(detailFooter())
     }, [])
-
-    const [validated, setValidated] = useState(false);
-
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        setValidated(true);
-    };
 
     return (
         <div className={css.main}>

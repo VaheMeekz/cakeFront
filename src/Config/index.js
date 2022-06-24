@@ -72,6 +72,11 @@ const routesMain = [
         path: "/fail",
         component: lazy(() => import('../Components/Fail/index')),
         exact: true
+    },{
+        title: "Result",
+        path: "/result",
+        component: lazy(() => import('../Components/Result/index')),
+        exact: true
     }
 ]
 

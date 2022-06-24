@@ -13,12 +13,12 @@ const ProductDetailImages = ({item}) => {
 
     return (
         <div className={css.mainImages}>
-            <img src={img} alt=""/>
+            <img src={img} alt="image"/>
             <div>
                 {
                     mainImage?.map((i) => {
                         return (
-                            <img onClick={() => handleClick(i)} src={i} alt=""/>
+                            <img onClick={() => handleClick(i)} src={i} alt="image"/>
                         )
                     })
                 }

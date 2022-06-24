@@ -1,11 +1,12 @@
 .main {
-    height: 130vh;
+    /*height: 130vh;*/
     display: flex;
     align-items: center;
-    margin-top: 7rem;
+    /*margin-top: 7rem;*/
 }
 
 .divTwo {
+    display: flex;
     margin-top: 5rem;
     margin-left: 1rem;
 }
@@ -17,6 +18,16 @@
 }
 
 .nameInp input {
+    width: 90% !important;
+    background: #FFFFFF;
+    border: 1px solid #A09898;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 0.3rem 0;
+    text-indent: 10px;
+}
+
+.input{
     width: 90% !important;
     background: #FFFFFF;
     border: 1px solid #A09898;
@@ -166,7 +177,6 @@
     color: #000000;
     padding-left: 1rem;
 }
-
 .byDiv div h6 {
     padding: 0;
     margin: 0;

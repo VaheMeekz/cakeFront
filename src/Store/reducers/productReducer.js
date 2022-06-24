@@ -19,8 +19,6 @@ import {
     WISH_DELETE,
     WISH_POST
 } from "../types";
-import basket from "../../Components/Basket";
-import {basketBanner} from "../actions/productActions";
 
 const initialState = {
     product: [],

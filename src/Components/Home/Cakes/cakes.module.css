@@ -14,7 +14,7 @@
     position: absolute;
     left: 52%;
     bottom: -2rem;
-    border: 1px solid #C4C4C4;
+    border: 3px solid #C4C4C4;
     box-sizing: border-box;
     padding: 1rem 1.5rem;
     border-radius: 50%;
@@ -38,7 +38,7 @@
     position: absolute;
     left: 45%;
     bottom: -2rem;
-    border: 1px solid #C4C4C4;
+    border: 3px solid #C4C4C4;
     box-sizing: border-box;
     padding: 1rem 1.5rem;
     border-radius: 50%;
@@ -65,7 +65,7 @@
     width: 90%;
     margin: 3rem 0;
     padding-top: 3rem;
-    padding-bottom: 3rem;
+    /*padding-bottom: 3rem;*/
 }
 
 .sliderFlex {

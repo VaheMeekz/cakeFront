@@ -154,8 +154,8 @@ const Header = () => {
         nextArrow: <PrevArrow/>,
         prevArrow: <NextArrow/>,
         autoplay: true,
-        speed: 3000,
-        autoplaySpeed: 3000,
+        speed: 1000,
+        autoplaySpeed: 5000,
         cssEase: "linear"
     };
 
@@ -334,7 +334,6 @@ const Header = () => {
                     </Navbar>
                 </div>
             </div>
-            {/*////////////////////////////////*/}
             <div>
                 {
                     pathname == '/' ? <Slider {...settings}>

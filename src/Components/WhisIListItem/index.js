@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import Swal from 'sweetalert2'
 
 const WishListItem = ({itemData}) => {
-
+    console.log(itemData, "itemData")
     const dispatch = useDispatch();
 
     const deleteItem = (id) => {
@@ -30,19 +30,24 @@ const WishListItem = ({itemData}) => {
     }
 
     return (
-            <div className={css.itemDiv} key={itemData.id}>
-                <div className={css.dropdown}>
-                    <Link to={"/product/" + itemData.id} onClick={() => addDetailId(itemData.id)}>
-                        <img src={itemData.productImg} alt=""/>
-                    </Link>
-                    <div className={css.dropdown_content}>
-                        <i onClick={() => deleteItem(itemData.id)} className={css.heart}><AiOutlineCloseCircle/></i>
-                    </div>
+        <div className={css.itemDiv} key={itemData.id}>
+            <div className={css.dropdown}>
+                <Link to={"/product/" + itemData.id} onClick={() => addDetailId(itemData.id)}>
+                    <img src={itemData.image?.split(",")[0]} alt="image"/>
+                </Link>
+                <div className={css.dropdown_content}>
+                    <i onClick={() => {
+                        deleteItem(itemData.id);
+                        setTimeout(() => {
+                            window.location.reload(false);
+                        }, 500);
+                    }} className={css.heart}><AiOutlineCloseCircle/></i>
                 </div>
-                <h5>{itemData.productName}</h5>
-                <h3>Price {itemData.price}</h3>
-                <button><Link to={"/product/" + itemData.id}>View more</Link></button>
             </div>
+            <h5>{itemData.productName}</h5>
+            <h3>Price {itemData.price}</h3>
+            <button><Link to={"/product/" + itemData.id}>View more</Link></button>
+        </div>
     );
 };
 

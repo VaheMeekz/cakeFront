@@ -56,7 +56,8 @@ const Home = () => {
                                             </h2>
                                             <p>{langValue == 'en' ? item.textEn
                                                 : langValue == 'ru' ? item.textRu : langValue == 'am' ? item.textHy : null}</p>
-                                            <button className={css.buttonSee}><Link to={'/about'}>{t("Seemore")}</Link></button>
+                                            <button className={css.buttonSee}><Link to={'/about'}>{t("Seemore")}</Link>
+                                            </button>
                                         </div>
                                     )
                                 })
@@ -79,7 +80,7 @@ const Home = () => {
                     <CakesTwo langValue={langValue} about_home_data={about_home_data}/>
                 </Row>
                 <Row className="justify-content-md-center mt-5">
-                        <ChefHome langValue={langValue} about_home_data={about_home_data}/>
+                    <ChefHome langValue={langValue} about_home_data={about_home_data}/>
                 </Row>
             </Container>
             <div>

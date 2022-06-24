@@ -41,20 +41,9 @@ const Product = ({langValue}) => {
 
     useEffect(() => {
         dispatch(productGet(categoryId, minValue, maxValue, page, limit, search, lang))
-    }, [page])
-
-    useEffect(() => {
         dispatch(productFooter())
-    }, [])
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        setValidated(true);
-    };
+    }, [page])
 
     return (
         <div>

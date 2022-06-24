@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import css from './basket.module.css';
 import BasketItem from "../BasketItem";
 import {useDispatch, useSelector} from "react-redux";

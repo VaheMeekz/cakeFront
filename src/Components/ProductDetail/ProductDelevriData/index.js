@@ -13,7 +13,6 @@ import {FiShoppingCart} from 'react-icons/fi';
 import {BsFillCartFill} from 'react-icons/bs';
 
 
-
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -65,10 +64,9 @@ const ToastDeleteWish = Swal.mixin({
 const ProductDelevriData = ({item, langValue}) => {
 
     const {t} = useTranslation();
-
     const [count, setCount] = useState(1)
-
     const [selected, setSelected] = useState(false);
+    const [price, setPrice] = useState(item?.price)
 
     const [selectedWish, setSelectedWish] = useState(false);
 
@@ -77,8 +75,8 @@ const ProductDelevriData = ({item, langValue}) => {
         productImg: item.image,
         productName: item.nameEn,
         count: count,
-        price: item.price,
-        total: item.price * count
+        price: price,
+        total: price
     })
 
     const dispatch = useDispatch();
@@ -147,6 +145,8 @@ const ProductDelevriData = ({item, langValue}) => {
     const handleChange = (e) => {
         data[e.target.name] = e.target.value
         setData(data)
+        setPrice(price + Number(e.target.value))
+        setData({...data, price: price, total: price})
     }
 
     const handleBasket = () => {
@@ -166,6 +166,7 @@ const ProductDelevriData = ({item, langValue}) => {
         setSelected(true)
         array.push(data)
         dispatch(basketPost(array))
+        console.log(array, ":arayyyyyyyyyyyyyyyy")
         localStorage.setItem("basketProduct", JSON.stringify(array))
     }
 
@@ -235,12 +236,19 @@ const ProductDelevriData = ({item, langValue}) => {
     const handleIngredients = (e) => {
         data['Ingredients'] = e.target.name
         setData(data)
+        if (e.target.checked) {
+            setPrice(price + Number(e.target.value))
+            setData({...data, price: price, total: price})
+        } else {
+            setPrice(price - Number(e.target.value))
+            setData({...data, price: price, total: price})
+        }
     }
 
     return (
         <div className={css.mainDesc} key={item.id}>
             <h1>{item.nameEn}</h1>
-            <h2>{t("Price")} {item.price * count}</h2>
+            <h2>{t("Price")} {price} AMD</h2>
             <p>
                 {langValue == "en" ? item.descriptionEn
                     : langValue == "ru" ? item.descriptionRu
@@ -252,7 +260,7 @@ const ProductDelevriData = ({item, langValue}) => {
                         {
                             cakes_Count?.map((item, index) => {
                                 return (
-                                    <option value={item}>{item}prs/{cakes_Price[index]}</option>
+                                    <option value={cakes_Price[index]}>{item}prs/{cakes_Price[index]}</option>
                                 )
                             })
                         }
@@ -267,7 +275,8 @@ const ProductDelevriData = ({item, langValue}) => {
                                 cake_addition_name?.map((item, index) => {
                                     return (
                                         <label className={css.checkbox} key={index}>
-                                            <input name={item} onChange={handleIngredients} type="checkbox"/>
+                                            <input name={item} onChange={handleIngredients}
+                                                   value={cake_additionPrice[index]} type="checkbox"/>
                                             <span>{item}</span>
                                         </label>
                                     )
@@ -278,13 +287,13 @@ const ProductDelevriData = ({item, langValue}) => {
                             {
                                 cake_additionPrice?.map((item, index) => {
                                     return (
-                                        <label className={css.checkbox} key={index}>
+                                        <label className={css.checkbox} key={index}
+                                               onClick={() => setPrice(Number(price) + Number(item))}>
                                             <span>{item} AMD</span>
                                         </label>
                                     )
                                 })
                             }
-
                         </div>
                     </div>
                 </> : null

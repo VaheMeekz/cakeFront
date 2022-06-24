@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import css from './wishList.module.css';
 import {wishPost} from "../../Store/actions/productActions";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,25 +7,39 @@ import {Col, Container, Row} from "react-bootstrap";
 import {GrBasket} from "react-icons/gr";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import axios from "axios";
+import keys from "../../keys";
+import {PRODUCT_DETAIL_GET} from "../../Store/types";
 
 const WishList = () => {
-
     const {t} = useTranslation();
-
     const wishData = useSelector(state => state.productReducer.wish);
-
     const dispatch = useDispatch();
+    const [data,setData] = useState([])
 
-    useEffect(() => {
-        // window.scrollTo(0, 0)
+    useEffect( () => {
+
         if (JSON.parse(localStorage.getItem("wishList"))) {
             let arr = [];
             JSON.parse(localStorage.getItem("wishList")).forEach(i => {
                 arr.push(i);
+                axios.get(`${keys.baseURI}/products/single`, {params: {id: i.id}})
+                    .then(function (response) {
+                        console.log(response.data,"[[[[[[[[[[[[[[[[[[[[[")
+                        setData((prev) => [...prev, response.data])
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
             });
             dispatch(wishPost(arr));
         }
     }, []);
+
+    console.log(data,"++++++++++++++++++++++++++++")
+
+
 
     return (
 
@@ -36,7 +50,7 @@ const WishList = () => {
                         <Col lg={12} md={5} xs={12} className="mt-5 mb-5">
                             <div className={css.mainFlex}>
                                 {
-                                    wishData?.map((item) => {
+                                    data?.map((item) => {
                                         return (
                                             <WishListItem itemData={item} />
                                         )
