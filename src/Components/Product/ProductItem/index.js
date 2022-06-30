@@ -95,7 +95,7 @@ const ProductItem = ({item, langValue}) => {
         <div className={css.itemDiv} key={item.id}>
             <div className={css.dropdown}>
                 <Link to={"/product/" + item.id} onClick={() => addDetailId(item.id)}>
-                    <img src={item.image.split(',')[0]} alt=""/>
+                    <img src={item.image.split(',')[0]} alt="image"/>
                 </Link>
                 <div className={css.dropdown_content}>
                     {
@@ -107,7 +107,7 @@ const ProductItem = ({item, langValue}) => {
             <h5>{langValue == "en" ? item.nameEn
                 : langValue == 'ru' ? item.nameRu
                     : langValue == 'am' ? item.nameHy : null}</h5>
-            <h3>{t("Price")} {item.price}</h3>
+            <h3>{t("Price")} {item.price} ֏</h3>
             <button><Link to={"/product/" + item.id}>{t("Viewmore")}</Link></button>
         </div>
     );

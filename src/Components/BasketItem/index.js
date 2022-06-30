@@ -12,22 +12,26 @@ const BasketItem = ({itemData, langValue}) => {
 
     const {t} = useTranslation();
 
-    const [count, setCount] = useState(itemData.count)
+    const [count, setCount] = useState(1)
 
     const dispatch = useDispatch();
 
     const [price, setPrice] = useState(Number(itemData.price))
 
+
+
     const handleClickCount = () => {
         setCount(count + 1)
         itemData.count = count + 1
         setPrice(price + itemData.price)
+        localStorage.setItem('price',Number(localStorage.getItem('price'))+Number(itemData.price))
     }
 
     const handleClickCountDown = () => {
         setCount(count - 1)
         itemData.count = count - 1
         setPrice(price - itemData.price)
+        localStorage.setItem('price',Number(localStorage.getItem('price'))-Number(itemData.price))
     }
 
     const deleteItem = (id) => {
@@ -42,6 +46,7 @@ const BasketItem = ({itemData, langValue}) => {
         }
         localStorage.setItem("basketProduct", JSON.stringify(array))
         dispatch(basketPostDelete(id))
+        localStorage.setItem('price',Number(localStorage.getItem('price'))-Number(price))
     }
 
     useEffect(() => {
@@ -73,13 +78,13 @@ const BasketItem = ({itemData, langValue}) => {
                                 : langValue == "am" ? itemData.productName : null}
                     </h5>
                 </td>
-                <td key={itemData.id} className={css.tdR}><h6>{itemData.price} AMD</h6></td>
+                <td key={itemData.id} className={css.tdR}><h6>{itemData.price} ֏</h6></td>
                 <td key={itemData.id} className={css.tdR}><span className={css.countData}>
                     {count}
                     <div>
-                                <img onClick={handleClickCount} src={arrowUp} alt=""/>
+                                <img onClick={handleClickCount} src={arrowUp} alt="image"/>
                         {
-                            count <= 1 ? <img src={arrowDown} alt=""/> :
+                            count <= 1 ? <img src={arrowDown} alt="image"/> :
                                 <img onClick={handleClickCountDown} src={arrowDown} alt=""/>
                         }
                     </div>
@@ -87,7 +92,7 @@ const BasketItem = ({itemData, langValue}) => {
                 <td key={itemData.id} className={css.tdR}>
                     <div className={css.icons}>
                         <div className={css.iconsFlex}>
-                            {count * itemData.price} AMD
+                            {price} ֏
                         </div>
                     </div>
                 </td>

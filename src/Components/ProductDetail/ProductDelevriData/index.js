@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import css from './productDelevriData.module.css';
 import {AiOutlineHeart} from 'react-icons/ai';
-import {IoMdArrowDropup} from 'react-icons/io';
 import arrowUp from '../../../Images/arrowIp.svg';
 import arrowDown from '../../../Images/arrowDown.svg';
 import Swal from "sweetalert2";
@@ -61,12 +60,12 @@ const ToastDeleteWish = Swal.mixin({
     }
 })
 
-const ProductDelevriData = ({item, langValue}) => {
-
+const ProductDelevriData = ({item}) => {
+    let langValue = localStorage.getItem("language")
     const {t} = useTranslation();
     const [count, setCount] = useState(1)
     const [selected, setSelected] = useState(false);
-    const [price, setPrice] = useState(item?.price)
+    const [price, setPrice] = useState(item ? item?.price : 0)
 
     const [selectedWish, setSelectedWish] = useState(false);
 
@@ -152,6 +151,7 @@ const ProductDelevriData = ({item, langValue}) => {
     const handleBasket = () => {
         let array = [];
         let local_item = localStorage.getItem("basketProduct");
+        localStorage.setItem("price",Number(localStorage.getItem('price'))+Number(item?.price))
         array = JSON.parse(local_item) || [];
         for (let i = 0; i < array.length; i++) {
             if (array[i].id === data.id) {
@@ -166,7 +166,6 @@ const ProductDelevriData = ({item, langValue}) => {
         setSelected(true)
         array.push(data)
         dispatch(basketPost(array))
-        console.log(array, ":arayyyyyyyyyyyyyyyy")
         localStorage.setItem("basketProduct", JSON.stringify(array))
     }
 
@@ -247,8 +246,11 @@ const ProductDelevriData = ({item, langValue}) => {
 
     return (
         <div className={css.mainDesc} key={item.id}>
-            <h1>{item.nameEn}</h1>
-            <h2>{t("Price")} {price} AMD</h2>
+            <h1>
+                {langValue == "en" ? item.nameEn
+                    : langValue == "ru" ? item.nameRu
+                        : langValue == "am" ? item.nameHy : null}</h1>
+            <h2>{t("Price")} {price} ֏</h2>
             <p>
                 {langValue == "en" ? item.descriptionEn
                     : langValue == "ru" ? item.descriptionRu
@@ -289,7 +291,7 @@ const ProductDelevriData = ({item, langValue}) => {
                                     return (
                                         <label className={css.checkbox} key={index}
                                                onClick={() => setPrice(Number(price) + Number(item))}>
-                                            <span>{item} AMD</span>
+                                            <span>{item} ֏</span>
                                         </label>
                                     )
                                 })

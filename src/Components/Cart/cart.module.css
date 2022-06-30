@@ -1,8 +1,9 @@
 .main {
     /*height: 130vh;*/
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     /*margin-top: 7rem;*/
+    padding-top: 15px;
 }
 
 .divTwo {
@@ -218,12 +219,23 @@
 
 .payment div {
     display: flex;
-    width: 40%;
-    flex-wrap: wrap;
+    align-items: center;
+    min-width: 190px;
+    grid-gap: 5px;
+}
+
+.select_slice {
+    display: flex;
+    flex-direction: column;
+}
+
+.onlineImagesBox img{
+    width: 50px;
+    height: 50px;
 }
 
 .payment img {
-    width: 15%;
+    width: 35%;
     cursor: pointer;
 }
 
@@ -262,8 +274,8 @@
 }
 
 .payment div input {
-    width: 33%;
-    margin-top: 0.3rem;
+    /*width: 33%;*/
+    /*margin-top: 0.3rem;*/
     cursor: pointer;
 }
 
@@ -404,4 +416,71 @@
         align-items: center;
         margin-top: 30rem;
     }
+}
+
+.mainBox{
+    display: flex;
+    padding: 15px 0;
+}
+
+.checkoutBox{
+    width: 100%;
+}
+
+.inputBox{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.inputBox label{
+    font-weight: bold;
+}
+
+/*.inputBox input{*/
+/*    text-indent: 10px;*/
+/*    padding: 5px 0;*/
+/*}*/
+
+.idram{
+    background: none;
+    border: 0;
+}
+
+.idram img{
+    width: 100%;
+}
+
+.error{
+    color: maroon;
+    font-size: 15px;
+    font-weight: bold;
+}
+.subBtn{
+    background: none;
+    border: 1px solid #701e6b;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.subBtn:hover{
+    background: #701e6b;
+    color: white;
+    border: 1px solid white;
+    transition: .2s;
+}
+
+.subBtnPay{
+    background: none;
+    border: 1px solid #701e6b;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.subBtnPay:hover{
+    background: #701e6b;
+    color: white;
+    border: 1px solid white;
+    transition: .2s;
 }

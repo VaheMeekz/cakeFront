@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import css from './basket.module.css';
 import BasketItem from "../BasketItem";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,11 @@ import Cart from "../Cart";
 const Basket = ({langValue}) => {
 
     const {t} = useTranslation();
+    const [pay, setPay] = useState(localStorage.getItem("price"))
 
+    useEffect(() => {
+        setPay(localStorage.getItem("price"))
+    }, [])
     const basketData = useSelector(state => state.productReducer.basket);
 
     const dispatch = useDispatch();
@@ -29,7 +33,7 @@ const Basket = ({langValue}) => {
 
 
     return (
-        <div className={css.mainBaskete} >
+        <div className={css.mainBaskete}>
             <div style={{
                 overflowX: 'auto'
             }}>
@@ -79,13 +83,11 @@ const Basket = ({langValue}) => {
                 }
             </div>
 
-
             <Container>
                 {
-                    basketData?.length > 0 ? <Cart basketData={basketData}/> : null
+                    basketData?.length > 0 ? <Cart basketData={basketData} pay={pay}/> : null
                 }
             </Container>
-
 
 
         </div>

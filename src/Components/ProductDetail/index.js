@@ -10,15 +10,14 @@ import {useTranslation} from "react-i18next";
 import Pink from "../Pink";
 
 
-const ProductDetail = ({langValue}) => {
-
+const ProductDetail = () => {
+    let langValue = localStorage.getItem("language")
     let {id} = useParams();
-
     const {t} = useTranslation();
-
     const productDataDetail = useSelector(state => state.productReducer.productDetailGetId);
+    const loading = useSelector(state => state.productReducer.loading);
     const productDataDetailFooter = useSelector(state => state.productReducer.detailFooter);
-
+    console.log(loading,"lllllllllllllll")
     const productDataDetailFooterImage = productDataDetailFooter?.map(i => i.image)
 
     const add = productDataDetail?.map(i => i?.adition_info_en?.split(','))
@@ -26,10 +25,13 @@ const ProductDetail = ({langValue}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         dispatch(productGet())
         dispatch(productDetailGetId(id))
         dispatch(detailFooter())
     }, [])
+
+
 
     return (
         <div className={css.main}>

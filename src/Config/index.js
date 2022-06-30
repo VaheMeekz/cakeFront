@@ -74,7 +74,7 @@ const routesMain = [
         exact: true
     },{
         title: "Result",
-        path: "/result",
+        path: "/result/:id",
         component: lazy(() => import('../Components/Result/index')),
         exact: true
     }

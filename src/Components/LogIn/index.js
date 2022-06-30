@@ -70,7 +70,8 @@ const LogIn = () => {
                                                         if (checkVal && checkVal.val !== false) {
                                                             localStorage.setItem('Auth',
                                                                 JSON.stringify({
-                                                                    token: response.data.token
+                                                                    token: response.data.token,
+                                                                    id:response.data.id
                                                                 }));
                                                             dispatch(profileGet(response.data.token))
                                                             document.cookie = "Rename" + "=" + JSON.stringify({
@@ -88,7 +89,8 @@ const LogIn = () => {
                                                         } else {
                                                             localStorage.setItem('Auth',
                                                                 JSON.stringify({
-                                                                    token: response.data.token
+                                                                    token: response.data.token,
+                                                                    id:response.data.id
                                                                 }));
                                                             navigate('/')
                                                             Swal.fire({

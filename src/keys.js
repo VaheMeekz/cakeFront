@@ -3,8 +3,13 @@ export default {
     // baseURI: 'https://back.ghcakes.am/api/v1',
     FAVORITE_LIST: 'AUTO-FAVORITES',
     ADMIN_AUTH_ID: 'AutoAuth',
-    i18nextLng: "i18nextLng"
+    i18nextLng: "i18nextLng",
+    myUrl:"http://localhost:3000"
 }
+
+export const SecretKey = "xCjiLWdrVsAlLyveBUUkDdJrcXiyVyoXKpxPuX"
+export const IdramID = "110001643"
+export const token = localStorage.getItem("Auth")
 
 export const makeArray = (length) => {
     return new Array(length).fill(undefined).map((_, index) => index);

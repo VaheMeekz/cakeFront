@@ -20,6 +20,7 @@ function App() {
 
     useEffect(() => {
         dispatch(langGet('en'))
+            localStorage.setItem("price",0)
     }, [])
 
     return (

@@ -54,7 +54,6 @@ export const productDetailGetId = (id) => {
     return (dispatch) => {
         axios.get(`${keys.baseURI}/products/single`, {params: {id: id}})
             .then(function (response) {
-                // handle success
                 dispatch({type: PRODUCT_DETAIL_GET, payload: response.data})
             })
             .catch(function (error) {

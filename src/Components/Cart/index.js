@@ -1,18 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Container, Row} from "react-bootstrap";
+import React, {useEffect} from 'react';
+import {Button, Container} from "react-bootstrap";
 import css from './cart.module.css';
 import idramSvg from '../../Images/idram.svg';
+import cart from '../../Images/masterCart.svg';
 import {Formik} from 'formik';
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
-import {deleveryDataGet} from "../../Store/actions/productActions";
+import {deleveryGetValue} from "../../Store/actions/productActions";
 import * as Yup from "yup";
 import Input from "./Input";
+import axios from "axios";
+import keys, {token} from "../../keys";
+import Form from 'react-bootstrap/Form'
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const validateSchema = Yup.object().shape({
     firstName: Yup.string()
-        .min(5, 'Must be 5-15 characters or less')
+        .min(2, 'Must be 5-15 characters or less')
         .max(15, 'Must be 5-15 characters or less')
         .required('Required'),
     lastName: Yup.string()
@@ -22,7 +26,9 @@ const validateSchema = Yup.object().shape({
     email: Yup.string()
         .email('Email is invalid')
         .required('Email is required'),
-    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+        .min(5, 'Must be 5-20 characters or less')
+        .max(20, 'Must be 20 characters or less'),
     location: Yup.string()
         .min(5, 'Must be 5-15 characters or less')
         .max(15, 'Must be 5-15 characters or less')
@@ -35,259 +41,190 @@ const validateSchema = Yup.object().shape({
         .min(5, 'Must be 5-15 characters or less')
         .max(15, 'Must be 5-15 characters or less')
         .required('Required'),
+    deliver:Yup.string().required("Deliver is required!"),
 });
 
-const secondValidate = Yup.object().shape({
-    firstName: Yup.string()
-        .min(5, 'Must be 5-15 characters or less')
-        .max(15, 'Must be 5-15 characters or less')
-        .required('Required'),
-    lastName: Yup.string()
-        .min(5, 'Must be 5-20 characters or less')
-        .max(20, 'Must be 20 characters or less')
-        .required('Required'),
-    location: Yup.string()
-        .min(5, 'Must be 5-15 characters or less')
-        .max(15, 'Must be 5-15 characters or less')
-        .required('Required'),
-    message: Yup.string()
-        .min(5, 'Must be 5-15 characters or less')
-        .max(500, 'Must be 5-15 characters or less')
-        .required('Required'),
-});
 
-const Cart = ({basketData}) => {
-
-    const {t} = useTranslation();
-
-    const deleveryValueData = useSelector(state => state.productReducer.deleveryValue);
-
+const Cart = ({basketData, pay}) => {
     const dispatch = useDispatch()
-
+    const {t} = useTranslation();
     useEffect(() => {
-        dispatch((deleveryDataGet()))
+        dispatch((deleveryGetValue()))
     }, []);
+    const deleveryValueData = useSelector(state => state.productReducer.deleveryValue);
+    let userToken =token && token !== null ? JSON.parse(token)?.token : null
+    let userId = token && token !== null ? JSON.parse(token)?.id : null
+    console.log(basketData,"++++")
+    return (<div className={css.main}>
+        <h2>{t("Getintouch")}</h2>
 
-    let tot = basketData?.map(i => i.total)
+        <Container>
+            <div className={css.mainBox}>
+                <Formik
+                    initialValues={{
+                        firstName: '',
+                        lastName: '',
+                        phoneNumber: "",
+                        email: "",
+                        location: "",
+                        subject: "",
+                        home: "",
+                        deliver:"",
+                        paymentType:""
+                    }}
+                    validationSchema={validateSchema}
+                    onSubmit={(values) => {
+                        if(values.paymentType == ""){
+                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                                user_id: userId,
+                                product_id: "",
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                email: values.email,
+                                phone: values.phoneNumber,
+                                addres: values.location,
+                                apartament: values.subject,
+                                delevery: values.deliver,
+                                productDescription: "",
+                                paymentType: 1,
+                                deleveryDate: "",
+                                deleveryTime: "",
 
-    const [total, setTotal] = useState(Number(tot))
+                            }, {
+                                headers: {
+                                    'Authorization': `Bearer ${userToken}`
+                                }})
+                                .then(function (response) {
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }else if(values.paymentType == "2"){
+                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                                user_id: userId,
+                                product_id: "",
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                email: values.email,
+                                phone: values.phoneNumber,
+                                addres: values.location,
+                                apartament: values.subject,
+                                delevery: values.deliver,
+                                productDescription: "",
+                                paymentType: 2,
+                                deleveryDate: "",
+                                deleveryTime: "",
 
-    const [isDisabled, setIsDisabled] = useState(true);
+                            }, {
+                                headers: {
+                                    'Authorization': `Bearer ${userToken}`
+                                }})
+                                .then(function (response) {
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }else if(values.paymentType == "3"){
+                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                                user_id: userId,
+                                product_id: "",
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                email: values.email,
+                                phone: values.phoneNumber,
+                                addres: values.location,
+                                apartament: values.subject,
+                                delevery: values.deliver,
+                                productDescription: "",
+                                paymentType: 3,
+                                deleveryDate: "",
+                                deleveryTime: "",
 
-    const handleClick = () => {
-        setIsDisabled(!isDisabled)
-    };
-
-    return (
-        <div className={css.main}>
-            <Container>
-                <Row>
-                    <div className={css.divTwo}>
-                        <h2>{t("Getintouch")}</h2>
-                        <Formik
-                            initialValues={{
-                                firstName: '',
-                                lastName: '',
-                                phoneNumber: "",
-                                location: "",
-                                email: "",
-                                subject: "",
-                                home: "",
-                            }}
-                            validate={validateSchema}
-                            onSubmit={(values, {setSubmitting}) => {
-                                setTimeout(() => {
-                                    console.log(JSON.stringify(values, null, 2));
-                                    setSubmitting(false);
-                                }, 400);
-                            }}
-                        >
-                            {({
-                                  values, errors, touched, handleChange, handleBlur, handleSubmit,
-                              }) => (
-                                <form onSubmit={handleSubmit} >
-                                    <div>
-                                        <div className={css.nameInp}>
-                                            <div>
-                                                <label htmlFor="firstName">{t("FirstName")}</label>
-                                                <Input name={"firstName"} type={"text"}/>
-                                            </div>
-
-                                            <div>
-                                                <label htmlFor="lastName">{t("LastName")}</label>
-                                                <Input name={"lastName"} type={"text"}/>
-                                            </div>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="phone">{t("Phone")}</label><br/>
-                                            <Input name={"phoneNumber"} type={"number"}/>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="email">{t("Email")}</label><br/>
-                                            <Input name={"email"} type={"email"}/>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="address">{t("Streetaddress")}</label><br/>
-                                            <Input name={"location"} type={"text"}/>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="Subject">{t("Subject")}</label><br/>
-                                            <Input name={"subject"} type={"text"}/>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="Apartment">{t("Apartmentsuiteunit")}</label><br/>
-                                            <Input name={"home"} type={"text"}/>
-                                        </div>
-                                        <div className={css.divInp}>
-                                            <label htmlFor="State">{t("State")}</label> <br/>
-                                            <select name="State" id="State">
-                                                {
-                                                    deleveryValueData?.map((item) => {
-                                                        return (
-                                                            <option value="volvo">
-                                                                <span>{item.loacation}-{item.price}</span>
-                                                            </option>
-                                                        )
-                                                    })
-                                                }
-                                            </select>
-                                        </div>
-                                        <Button variant="primary" type="submit">
-                                            {t("Send")}
-                                        </Button>
-                                    </div>
-                                    <div className={css.btnDiv}>
-
-                                    </div>
-                                </form>
-                            )}
-                        </Formik>
-                        <div>
-                            <Formik
-                                initialValues={{
-                                    firstName: '',
-                                    lastName: '',
-                                    location: "",
-                                    message: "",
-                                }}
-                                validate={secondValidate}
-                                onSubmit={(values, {setSubmitting}) => {
-                                    setTimeout(() => {
-                                        console.log(JSON.stringify(values, null, 2));
-                                        setSubmitting(false);
-                                    }, 400);
-                                }}
-                            >
-                                {({
-                                      values, errors, touched, handleChange, handleBlur, handleSubmit,
-                                  }) => (
-                                    <form onSubmit={handleSubmit}>
-                                        <div className={css.ship}>
-                                            <label className={css.checkbox}>
-                                                <input
-                                                    type="checkbox"
-                                                    name="Apartment"
-                                                    id="check1"
-                                                    onChange={handleClick}
-                                                    onBlur={handleBlur}
-                                                />
-                                                <span>{t("ShipToADifferentAddress")}</span>
-                                            </label>
-                                        </div>
-                                        {/*.............................................,,,,,,,,,,,,,,,,*/}
-                                        <div className={`${isDisabled ? css.opac : null}`}>
-                                            <div className={css.nameInp}>
-                                                <div>
-                                                    <label htmlFor="firstName">{t("FirstName")}</label><br/>
-                                                    <Input name={"firstName"} type={"text"}/>
-                                                </div>
-                                                <div>
-                                                    <label htmlFor="lastName">{t("LastName")}</label><br/>
-                                                    <Input name={"lastName"} type={"text"}/>
-                                                </div>
-                                            </div>
-                                            <div className={css.divInp}>
-                                                <label htmlFor="address">{t("Streetaddress")}</label><br/>
-                                                <Input name={"location"} type={"text"}/>
-                                            </div>
-                                            <div className={css.divInp}>
-                                                <label htmlFor="Apartment">{t("Apartmentsuiteunit")}</label><br/>
-                                                <input
-                                                    type="text"
-                                                    name="Apartment"
-                                                    id="Apartment"
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.email}
-                                                    disabled={isDisabled}
-                                                />
-                                            </div>
-                                            <div className={css.divInp}>
-                                                <label htmlFor="State">{t("State")}</label> <br/>
-                                                <select name="State" id="State" disabled={isDisabled}>
-                                                    {
-                                                        deleveryValueData?.map((item) => {
-                                                            return (
-                                                                <option value="volvo">
-                                                                    <span>{item.loacation}-{item.price}</span>
-                                                                </option>
-                                                            )
-                                                        })
-                                                    }
-                                                </select>
-                                            </div>
-                                            <div className={css.divInpTexterea}>
-                                                <label htmlFor="Notes">{t("Notes")}</label><br/>
-                                                <input
-                                                    type="text"
-                                                    name="Notes"
-                                                    id="Notes"
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.email}
-                                                    disabled={isDisabled}
-                                                />
-                                            </div>
-                                        </div>
-                                    </form>)}
-                            </Formik>
-                        </div>
-
-                    </div>
-                    <div className={css.byDiv}>
-                        {
-                            basketData?.map((item) => {
-                                return (
-                                    <div>
-                                        <h2>Your order</h2>
-                                        <h5>Product</h5>
-                                        <div className={css.byDIvBorder}>
-                                            <div>
-                                                <p>{item.productName}</p>
-                                                <h6>{item.count}</h6>
-                                                <h6>{item.total} AMD</h6>
-                                            </div>
-                                        </div>
-                                        <h3>{t("TOTAL")} {total} AMD</h3>
-                                    </div>
-                                )
-                            })
+                            }, {
+                                headers: {
+                                    'Authorization': `Bearer ${userToken}`
+                                }})
+                                .then(function (response) {
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
                         }
-                        <div className={css.payment}>
-                            <h5>{t("Paymenttype")}</h5>
-                            <div>
-                                <input type="radio" id="html" name="fav_language" value="HTML"/>
-                                <label htmlFor="html">{t("Onlinepayment")}</label>
-                                <input type="radio" id="html2" name="fav_language" value="HTML"/>
-                                <label htmlFor="html2">{t("Cashondelivery")}</label>
-                            </div>
-                            <img src={idramSvg} alt="image"/>
-                        </div>
-                    </div>
-                </Row>
-            </Container>
-        </div>
-    );
+                    }}>
+                    {({
+                          values,
+                          errors,
+                          touched,
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          isSubmitting,
+                      }) => (<form onSubmit={handleSubmit}>
+                        <Input name={"firstName"} type={"text"}
+                               label={"First Name"}/>
+                        <Input name={"lastName"} type={"text"}
+                               label={"Last Name"}/>
+                        <Input name={"phoneNumber"} type={"text"}
+                               label={"Phone Number"}/>
+                        <Input name={"email"} type={"email"} label={"Email"}/>
+                        <Input name={"location"} type={"text"}
+                               label={"Location"}/>
+                        <Input name={"subject"} type={"text"}
+                               label={"subject"}/>
+                        <Input name={"home"} type={"text"}
+                               label={"Home"}/>
+                        <Form.Select  onChange={handleChange}
+                                      onBlur={handleBlur}
+                                        name="deliver"
+                                    className={css.select}>
+                            {
+                                deleveryValueData?.map(i=>{
+                                    return (
+                                        <option value={i.price} key={i.id}>{i.loacation}</option>
+                                    )
+                                })
+                            }
+                        </Form.Select>
+                        {errors.deliver && <div className="input-feedback">{errors.color}</div>}
+
+                        {
+                            userToken ? (
+                                <div className={css.payment}>
+                                    <div className={css.byDiv}>
+                                        <h5>{t("Paymenttype")}</h5>
+                                        <div className={css.select_slice}>
+                                            <div onChange={handleChange}>
+                                                <input type="radio" value="2" name="paymentType" />
+                                                    <img src={idramSvg} alt="image"/>
+                                                <input type="radio" value="3" name="paymentType" />
+                                                    <img src={cart} alt="image"/>
+                                                {
+                                                    values.paymentType !== "" && <button type="submit" className={css.subBtnPay}>Pay</button>
+                                                }
+                                            </div>
+                                            <div>
+                                                <button type="submit" className={css.subBtn}>Cash on delivery</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <h4>grancvel gnman hamar</h4>
+                                </div>
+                            )
+                        }
+
+                    </form>)}
+
+                </Formik>
+            </div>
+
+        </Container>
+    </div>);
 };
 
 export default Cart;

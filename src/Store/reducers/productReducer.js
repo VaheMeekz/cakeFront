@@ -23,6 +23,7 @@ import {
 const initialState = {
     product: [],
     productDetailGetId: [],
+    loading: true,
     basket: [],
     wish: [],
     statusCode: undefined,
@@ -64,7 +65,7 @@ export const productReducer = (state = initialState, action) => {
 
         case PRODUCT_DETAIL_GET:
 
-            return {...state, productDetailGetId: [action.payload]}
+            return {...state, productDetailGetId: [action.payload], loading: false}
 
         case BASKET_POST:
 
@@ -154,11 +155,8 @@ export const productReducer = (state = initialState, action) => {
             return {...state, detailFooter: action.payload}
 
         case LANG_GET:
-
             return {...state, lang: action.payload}
-
         case DELEVERY_DATA__GET:
-
             return {...state, deleveryDataGet: action.payload}
 
         case HOME_BANNER_DATA__GET:

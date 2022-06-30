@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import css from './product.module.css';
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import { Col, Container, Row} from "react-bootstrap";
 import ProductFilter from "./ProductFilter";
 import {useDispatch, useSelector} from "react-redux";
-import {productReducer} from "../../Store/reducers/productReducer";
 import {productFooter, productGet} from "../../Store/actions/productActions";
 import ProductItem from "./ProductItem";
-import productImg from '../../Images/productBg.png';
 import {makeArray} from "../../keys";
 import {MdOutlineKeyboardArrowRight} from 'react-icons/md';
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md';
@@ -27,7 +25,6 @@ const Product = ({langValue}) => {
     const [categoryId, setCategoryId] = useState([]);
     const [minValue, setMinValue] = useState('');
     const [maxValue, setMaxValue] = useState('');
-    const [validated, setValidated] = useState(false);
     const [search, setSearch] = useState('')
     const [lang, setLang] = useState('en')
 
