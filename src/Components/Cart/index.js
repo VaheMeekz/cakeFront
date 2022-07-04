@@ -12,6 +12,7 @@ import Input from "./Input";
 import axios from "axios";
 import keys, {token} from "../../keys";
 import Form from 'react-bootstrap/Form'
+import {useNavigate} from "react-router-dom";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const validateSchema = Yup.object().shape({
@@ -46,7 +47,8 @@ const validateSchema = Yup.object().shape({
 
 
 const Cart = ({basketData, pay}) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     const {t} = useTranslation();
     useEffect(() => {
         dispatch((deleveryGetValue()))
@@ -54,7 +56,6 @@ const Cart = ({basketData, pay}) => {
     const deleveryValueData = useSelector(state => state.productReducer.deleveryValue);
     let userToken =token && token !== null ? JSON.parse(token)?.token : null
     let userId = token && token !== null ? JSON.parse(token)?.id : null
-    console.log(basketData,"++++")
     return (<div className={css.main}>
         <h2>{t("Getintouch")}</h2>
 
@@ -75,7 +76,7 @@ const Cart = ({basketData, pay}) => {
                     validationSchema={validateSchema}
                     onSubmit={(values) => {
                         if(values.paymentType == ""){
-                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                            axios.post(`${keys.baseURI}/orders/`, {
                                 user_id: userId,
                                 product_id: "",
                                 firstName: values.firstName,
@@ -101,9 +102,9 @@ const Cart = ({basketData, pay}) => {
                                     console.log(error);
                                 });
                         }else if(values.paymentType == "2"){
-                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                            axios.post(`${keys.baseURI}/orders/`, {
                                 user_id: userId,
-                                product_id: "",
+                                product_id: "2",
                                 firstName: values.firstName,
                                 lastName: values.lastName,
                                 email: values.email,
@@ -121,13 +122,14 @@ const Cart = ({basketData, pay}) => {
                                     'Authorization': `Bearer ${userToken}`
                                 }})
                                 .then(function (response) {
-                                    console.log(response);
+                                    console.log(response.data,"+++++++++++++++++++++++++++++++++++++");
+                                    navigate(`/result/${response.data.payment_id}`)
                                 })
                                 .catch(function (error) {
                                     console.log(error);
                                 });
                         }else if(values.paymentType == "3"){
-                            axios.post(`${keys.baseURI}/api/v1/orders/`, {
+                            axios.post(`${keys.baseURI}/orders/`, {
                                 user_id: userId,
                                 product_id: "",
                                 firstName: values.firstName,

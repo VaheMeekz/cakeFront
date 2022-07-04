@@ -8,10 +8,9 @@ const Index = () => {
     const [data, setDate] = useState(null);
     const idram = useRef();
     let {id} = useParams();
-
     useEffect(() => {
         axios
-            .post(`${keys.baseURI}/api/v1/orders/getSingle`, {
+            .post(`${keys.baseURI}/orders/getSingle`, {
                 id,
             })
             .then(function (response) {
